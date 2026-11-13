@@ -21,7 +21,7 @@ def valid(x,y,boxes):
     # The walkable space is the museum plus its neutral entrance apron.
     for i in range(16):
         t=math.tau*i/16;px=x+RADIUS*math.cos(t);py=y+RADIUS*math.sin(t)
-        if not ((-5<=px<=5 and 0<=py<=27) or (-6<=px<=6 and -12<=py<=0) or (-6<=px<=6 and -18<=py<=-12)):
+        if not ((-5<=px<=5 and 0<=py<=27) or (-4<=px<=4 and -8<=py<=0) or (-4<=px<=4 and -14<=py<=-8)):
             return False
     for x0,x1,y0,y1 in boxes:
         nx=max(x0,min(x,x1));ny=max(y0,min(y,y1))
@@ -43,7 +43,7 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
     def invoke(self,context,event):
         if context.area.type!='VIEW_3D':return {'CANCELLED'}
         self.area=context.area;self.region=context.region;self.rv=context.space_data.region_3d
-        self.pos=Vector((0,-16.5,EYE));self.yaw=0.;self.pitch=0.;self.keys=set()
+        self.pos=Vector((0,-12.5,EYE));self.yaw=0.;self.pitch=0.;self.keys=set()
         self.boxes=build_obstacles(context);self.last=time.perf_counter()
         self.cx=self.region.x+self.region.width//2;self.cy=self.region.y+self.region.height//2
         self.rv.view_perspective='PERSP';context.space_data.overlay.show_overlays=False
