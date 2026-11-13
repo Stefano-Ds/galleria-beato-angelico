@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#ddd5c8">
+<title>Galleria Beato Angelico</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#ddd5c8;font-family:Georgia,serif}canvas{display:block;width:100%;height:100%;touch-action:none}button{font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}#cover{position:fixed;inset:0;display:grid;place-items:center;background:#211c1652;backdrop-filter:blur(3px);z-index:4}#card{text-align:center;color:#f6f2e9;padding:38px;border:1px solid #ffffff5c;background:#252019c9;max-width:90vw}h1{font-size:clamp(26px,4vw,44px);font-weight:400;margin:0 0 24px}#enter{border:1px solid #d3bd94;background:#ece4d3;color:#30291f;padding:13px 42px;font-size:19px}#enter:disabled{opacity:.55;cursor:wait}#status{font:13px/1.6 system-ui;margin:19px 0 0;max-width:360px}#tools{position:fixed;top:max(18px,env(safe-area-inset-top));right:18px;display:flex;gap:9px;z-index:3}#tools button{border:1px solid #bfb4a3;background:#f6f1e6e6;color:#493f32;border-radius:50%;width:44px;height:44px;font:22px system-ui}#hint{position:fixed;bottom:max(20px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);background:#29251fba;color:#fff;padding:9px 17px;border-radius:20px;font:12px system-ui;white-space:nowrap;pointer-events:none}#dot{position:fixed;top:50%;left:50%;width:4px;height:4px;border-radius:50%;background:#fff9;pointer-events:none;display:none}#pad{position:fixed;left:24px;bottom:28px;width:126px;height:126px;border:1px solid #ffffff8c;border-radius:50%;background:#302a2255;touch-action:none;display:none}#stick{position:absolute;left:43px;top:43px;width:40px;height:40px;background:#f1e8d8cc;border:1px solid #fff;border-radius:50%;pointer-events:none}body.touch #pad{display:block}body.touch #hint{bottom:18px;font-size:11px}body.running #cover{display:none}body.running #dot{display:block}button:focus-visible{outline:3px solid #b68c45;outline-offset:4px}
+</style>
+<script type="importmap">{"imports":{"three":"./three.module.js"}}</script>
+</head>
+<body>
+<div id="cover"><div id="card"><h1>Galleria Beato Angelico</h1><button id="enter" disabled>Caricamento…</button><p id="status" role="status">Preparazione della visita</p></div></div>
+<div id="tools"><button id="reset" aria-label="Torna all'ingresso" title="Torna all’ingresso">↺</button><button id="full" aria-label="Schermo intero" title="Schermo intero">⛶</button><button id="pause" aria-label="Pausa" title="Pausa">Ⅱ</button></div>
+<div id="hint">W A S D / frecce · Mouse per guardare · Esc per pausa</div><div id="dot"></div><div id="pad" aria-label="Comando movimento"><div id="stick"></div></div>
+<script type="module">
+import * as THREE from 'three';
+import {GLTFLoader} from './GLTFLoader.js';
+const $=id=>document.getElementById(id),status=$('status'),enter=$('enter');
+const touch=matchMedia('(pointer:coarse)').matches;if(touch){document.body.classList.add('touch');$('hint').textContent='Joystick per camminare · Trascina per guardare'}
+let renderer;
+try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});}catch(e){status.textContent='Il browser non supporta la grafica 3D. Prova Chrome, Edge o Safari aggiornato.';throw e}
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.75));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.10;document.body.prepend(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color('#d9d3c8');
+const camera=new THREE.PerspectiveCamera(68,innerWidth/innerHeight,.06,100);camera.rotation.order='YXZ';
+scene.add(new THREE.HemisphereLight(0xfff6e6,0x8b6f55,2));
+const sun=new THREE.DirectionalLight(0xfff1da,2.5);sun.position.set(0,7,4);scene.add(sun);
+for(const y of [3,9,15,22,26]){const l=new THREE.PointLight(0xffe9c5,23,11,1.3);l.position.set(0,5.2,-y);scene.add(l)}
+const pos={x:0,y:-4.5};let yaw=0,pitch=0,running=false,ready=false,boxes=[];
+const keys=new Set(),joy={x:0,y:0};
+function reset(){pos.x=0;pos.y=-4.5;yaw=0;pitch=0;sync()}
+function sync(){camera.position.set(pos.x,1.7,-pos.y);camera.rotation.set(pitch,-yaw,0);renderer.domElement.dataset.visitorPosition=JSON.stringify([pos.x,pos.y,1.7])}
+const radius=.28;
+function valid(x,y){for(let i=0;i<16;i++){const t=Math.PI*2*i/16,px=x+radius*Math.cos(t),py=y+radius*Math.sin(t);if(!((px>=-5&&px<=5&&py>=0&&py<=27)||(px>=-6&&px<=6&&py>=-6&&py<=0)))return false}for(const [x0,x1,y0,y1]of boxes){const nx=Math.max(x0,Math.min(x,x1)),ny=Math.max(y0,Math.min(y,y1));if((x-nx)**2+(y-ny)**2<radius**2)return false}return true}
+function move(dx,dy){const n=Math.max(1,Math.ceil(Math.hypot(dx,dy)/.055));for(let i=0;i<n;i++){if(valid(pos.x+dx/n,pos.y))pos.x+=dx/n;if(valid(pos.x,pos.y+dy/n))pos.y+=dy/n}}
+function look(dx,dy){yaw+=dx*.0025;pitch=Math.max(-1.3,Math.min(1.3,pitch-dy*.0025));sync()}
+function stop(){running=false;keys.clear();joy.x=joy.y=0;document.body.classList.remove('running');enter.textContent='Riprendi';if(document.pointerLockElement)document.exitPointerLock()}
+async function start(){if(!ready)return;running=true;document.body.classList.add('running');if(!touch){try{await renderer.domElement.requestPointerLock()}catch(e){/* Drag-to-look remains available when pointer lock is unavailable. */}}}
+enter.onclick=start;$('pause').onclick=stop;$('reset').onclick=reset;
+$('full').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){}};
+addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();if(running)keys.add(e.code)}if(e.code==='Escape'&&running)stop()});
+addEventListener('keyup',e=>keys.delete(e.code));addEventListener('blur',()=>{if(running)stop()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&running)stop()});
+document.addEventListener('pointerlockchange',()=>{if(!document.pointerLockElement&&running&&!drag)stop()});
+let drag=null;
+renderer.domElement.addEventListener('pointerdown',e=>{if(!running)return;if(!touch&&!document.pointerLockElement){renderer.domElement.requestPointerLock()?.catch(()=>{});}drag={id:e.pointerId,x:e.clientX,y:e.clientY};renderer.domElement.setPointerCapture(e.pointerId)});
+renderer.domElement.addEventListener('pointermove',e=>{if(!running)return;if(document.pointerLockElement){look(e.movementX,e.movementY)}else if(drag&&drag.id===e.pointerId){look(e.clientX-drag.x,e.clientY-drag.y);drag.x=e.clientX;drag.y=e.clientY}});
+renderer.domElement.addEventListener('pointerup',()=>drag=null);renderer.domElement.addEventListener('pointercancel',()=>drag=null);
+const pad=$('pad'),stick=$('stick');let jid=null;
+function joyMove(e){const b=pad.getBoundingClientRect();let x=(e.clientX-b.left-b.width/2)/43,y=(e.clientY-b.top-b.height/2)/43;const len=Math.max(1,Math.hypot(x,y));joy.x=x/len;joy.y=-y/len;stick.style.transform=`translate(${joy.x*35}px,${-joy.y*35}px)`}
+pad.addEventListener('pointerdown',e=>{if(!running)return;jid=e.pointerId;pad.setPointerCapture(jid);joyMove(e)});pad.addEventListener('pointermove',e=>{if(e.pointerId===jid)joyMove(e)});for(const ev of ['pointerup','pointercancel'])pad.addEventListener(ev,()=>{jid=null;joy.x=joy.y=0;stick.style.transform='none'});
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+reset();let previous=performance.now();renderer.setAnimationLoop(now=>{const dt=Math.min(.05,(now-previous)/1000);previous=now;if(running){const f=Number(keys.has('KeyW')||keys.has('ArrowUp'))-Number(keys.has('KeyS')||keys.has('ArrowDown'))+joy.y,r=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'))+joy.x;const k=(keys.has('ShiftLeft')||keys.has('ShiftRight')?3.5:1.8)*dt/Math.max(1,Math.hypot(f,r));move((Math.sin(yaw)*f+Math.cos(yaw)*r)*k,(Math.cos(yaw)*f-Math.sin(yaw)*r)*k);sync()}renderer.render(scene,camera)});
+try{const results=await Promise.all([new GLTFLoader().loadAsync('./galleria.glb'),fetch('./collisioni.json').then(r=>{if(!r.ok)throw Error('collisioni');return r.json()})]);boxes=results[1];scene.add(results[0].scene);ready=true;enter.disabled=false;enter.textContent='Entra';status.textContent=touch?'Usa il joystick per camminare e trascina per guardarti intorno.':'Cammina con W A S D o le frecce. Muovi il mouse per guardarti intorno.';}catch(e){console.error(e);enter.textContent='Riprova';enter.disabled=false;enter.onclick=()=>location.reload();status.textContent='Caricamento non riuscito. Controlla la connessione e riprova.'}
+</script>
+</body></html>
