@@ -1,0 +1,479 @@
+{
+  "title": "Beato Angelico · vita e stile",
+  "legend": {
+    "above": "Vita e riconoscimenti",
+    "below": "Evoluzione dello stile"
+  },
+  "note": "Le date approssimative restano indicate come tali. Le tappe sono ordinate, con distanze non in scala. Le fotografie dei luoghi e i ritratti sono immagini illustrative, non documenti contemporanei agli eventi.",
+  "ring": {
+    "x": 0,
+    "y": -6.45,
+    "radius": 0.55,
+    "seconds": 2
+  },
+  "events": [
+    {
+      "id": 0,
+      "date": "1395–1400 circa",
+      "life": {
+        "title": "Le origini nel Mugello",
+        "text": "Nasce a Vicchio con il nome di Guido di Pietro. La data di nascita non è certa."
+      },
+      "style": null,
+      "caption": "Vicchio, Piazza Giotto",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Piazza_Giotto_(Vicchio).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Piazza_Giotto_%28Vicchio%29.jpg/960px-Piazza_Giotto_%28Vicchio%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Mongolo1984",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 0,
+        "row": 0
+      },
+      "wallTiles": {
+        "life": 0,
+        "style": null
+      }
+    },
+    {
+      "id": 1,
+      "date": "Primi anni del Quattrocento",
+      "life": null,
+      "style": {
+        "title": "Tra gotico e miniatura",
+        "text": "Eleganza, fondi dorati e dettagli preziosi: la formazione guarda a Lorenzo Monaco, Starnina e Ghiberti."
+      },
+      "caption": "Lorenzo Monaco, Incoronazione della Vergine: un riferimento della formazione",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Lorenzo_Monaco_-_Incoronazione_della_Vergine_-_Google_Art_Project.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Lorenzo_Monaco_-_Incoronazione_della_Vergine_-_Google_Art_Project.jpg/960px-Lorenzo_Monaco_-_Incoronazione_della_Vergine_-_Google_Art_Project.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Lorenzo Monaco",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 1,
+        "row": 0
+      },
+      "wallTiles": {
+        "life": null,
+        "style": 3
+      }
+    },
+    {
+      "id": 2,
+      "date": "1418 circa",
+      "life": {
+        "title": "La scelta domenicana",
+        "text": "Entra a San Domenico a Fiesole e assume il nome di fra Giovanni. Arte e fede accompagnano la sua vita."
+      },
+      "style": null,
+      "caption": "Convento di San Domenico a Fiesole",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:San_domenico,_fiesole,_int.,_altare_maggiore_02.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/San_domenico%2C_fiesole%2C_int.%2C_altare_maggiore_02.JPG/960px-San_domenico%2C_fiesole%2C_int.%2C_altare_maggiore_02.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "sailko",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 2,
+        "row": 0
+      },
+      "wallTiles": {
+        "life": 4,
+        "style": null
+      }
+    },
+    {
+      "id": 3,
+      "date": "Anni Venti e Trenta",
+      "life": null,
+      "style": {
+        "title": "Verso il Rinascimento",
+        "text": "Le figure acquistano volume; prospettiva e luce rendono più naturale lo spazio, senza perdere la delicatezza."
+      },
+      "caption": "Beato Angelico, Pala di Fiesole",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Angelico,_pala_di_fiesole,_full.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dc/Angelico%2C_pala_di_fiesole%2C_full.jpg/960px-Angelico%2C_pala_di_fiesole%2C_full.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Fra Angelico / Lorenzo di Credi",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 3,
+        "row": 0
+      },
+      "wallTiles": {
+        "life": null,
+        "style": 7
+      }
+    },
+    {
+      "id": 4,
+      "date": "1432–1434 circa",
+      "life": {
+        "title": "La Deposizione Strozzi",
+        "text": "Completa la pala iniziata da Lorenzo Monaco per la cappella della famiglia Strozzi."
+      },
+      "style": {
+        "title": "Il dolore diventa concreto",
+        "text": "Il corpo di Cristo ha peso; gesti, volti e spazio rendono la scena più umana e credibile."
+      },
+      "caption": "Beato Angelico e Lorenzo Monaco, Deposizione Strozzi",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Beato_angelico,_pala_strozzi_della_deposizione,_con_cuspidi_e_predella_di_lorenzo_monaco,_01.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Beato_angelico%2C_pala_strozzi_della_deposizione%2C_con_cuspidi_e_predella_di_lorenzo_monaco%2C_01.JPG/960px-Beato_angelico%2C_pala_strozzi_della_deposizione%2C_con_cuspidi_e_predella_di_lorenzo_monaco%2C_01.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Sailko",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 0,
+        "row": 1
+      },
+      "wallTiles": {
+        "life": 8,
+        "style": 9
+      }
+    },
+    {
+      "id": 5,
+      "date": "1433–1435",
+      "life": {
+        "title": "Il Tabernacolo dei Linaioli",
+        "text": "Riceve nel 1433 la commissione della corporazione dei Linaioli; Ghiberti progetta la cornice."
+      },
+      "style": {
+        "title": "Preziosità e solidità",
+        "text": "Oro e colori ricchi convivono con figure solide: tradizione tardogotica e novità rinascimentali."
+      },
+      "caption": "Beato Angelico, Tabernacolo dei Linaioli",
+      "source": "https://museitoscana.cultura.gov.it/gallerie/tabernacolo-dei-linaioli/",
+      "sourceLabel": "Musei nazionali della Toscana",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_%E2%80%94_Tabernacle_of_the_Linaioli.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Fra_Angelico_%E2%80%94_Tabernacle_of_the_Linaioli.jpg/960px-Fra_Angelico_%E2%80%94_Tabernacle_of_the_Linaioli.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Gleb Simonov",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 1,
+        "row": 1
+      },
+      "wallTiles": {
+        "life": 10,
+        "style": 11
+      }
+    },
+    {
+      "id": 6,
+      "date": "Fine anni Trenta–anni Quaranta",
+      "life": {
+        "title": "Il cantiere di San Marco",
+        "text": "Lavora con i collaboratori al convento rinnovato da Michelozzo e sostenuto da Cosimo de’ Medici."
+      },
+      "style": {
+        "title": "Dipingere per la preghiera",
+        "text": "Nelle celle riduce decorazioni e dettagli: composizioni semplici e colori sobri favoriscono la meditazione."
+      },
+      "caption": "Chiostro del convento di San Marco, Firenze",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Cloister_of_the_Convent_of_San_Marco,_15th_century,_Florence_(1).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Cloister_of_the_Convent_of_San_Marco%2C_15th_century%2C_Florence_%281%29.jpg/960px-Cloister_of_the_Convent_of_San_Marco%2C_15th_century%2C_Florence_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Richard Mortel",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 2,
+        "row": 1
+      },
+      "wallTiles": {
+        "life": 12,
+        "style": 13
+      }
+    },
+    {
+      "id": 7,
+      "date": "1440–1445 circa",
+      "life": null,
+      "style": {
+        "title": "L’Annunciazione di San Marco",
+        "text": "Il portico, la profondità e i gesti raccolti uniscono spazio rinascimentale e significato spirituale della luce."
+      },
+      "caption": "Beato Angelico, Annunciazione di San Marco",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Angelico_-_Annunciation_-_San_Marco_north_corridor.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Angelico_-_Annunciation_-_San_Marco_north_corridor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "author": "Fra Angelico",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 3,
+        "row": 1
+      },
+      "wallTiles": {
+        "life": null,
+        "style": 15
+      }
+    },
+    {
+      "id": 8,
+      "date": "Anni Quaranta: San Marco",
+      "life": null,
+      "style": {
+        "title": "L’essenzialità di Cristo deriso",
+        "text": "Mani isolate evocano la violenza; Maria e san Domenico invitano alla contemplazione della sofferenza di Cristo."
+      },
+      "caption": "Beato Angelico e bottega, Cristo deriso, cella 7 di San Marco",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_-_Mocking_of_Christ_(Cell_7)_-_WGA00541.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Fra_Angelico_-_Mocking_of_Christ_%28Cell_7%29_-_WGA00541.jpg/960px-Fra_Angelico_-_Mocking_of_Christ_%28Cell_7%29_-_WGA00541.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Fra Angelico",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 0,
+        "row": 2
+      },
+      "wallTiles": {
+        "life": null,
+        "style": 17
+      }
+    },
+    {
+      "id": 9,
+      "date": "Anni Quaranta: oltre Firenze",
+      "life": {
+        "title": "Una fama che si allarga",
+        "text": "Il testo ricorda Cortona, Perugia, Orvieto e Roma: l’attività raggiunge nuovi centri e committenti."
+      },
+      "style": null,
+      "caption": "Beato Angelico, Annunciazione di Cortona: immagine di un’opera, non datazione del soggiorno",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Angelico_Annunciation_(Cortona).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/Angelico_Annunciation_%28Cortona%29.jpg/960px-Angelico_Annunciation_%28Cortona%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Fra Angelico",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 1,
+        "row": 2
+      },
+      "wallTiles": {
+        "life": 18,
+        "style": null
+      }
+    },
+    {
+      "id": 10,
+      "date": "Anni Quaranta: Roma",
+      "life": {
+        "title": "Al servizio dei pontefici",
+        "text": "Lavora a Roma per Eugenio IV e Niccolò V, portando la propria pittura nella corte pontificia."
+      },
+      "style": {
+        "title": "Un linguaggio monumentale",
+        "text": "Architetture imponenti, narrazioni solenni e richiami classici rispondono alla destinazione papale."
+      },
+      "caption": "Beato Angelico, affreschi della Cappella Niccolina",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Angelico,_niccolina_08.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/eb/Angelico%2C_niccolina_08.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "author": "Fra Angelico",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 2,
+        "row": 2
+      },
+      "wallTiles": {
+        "life": 20,
+        "style": 21
+      }
+    },
+    {
+      "id": 11,
+      "date": "1448–1449 circa",
+      "life": {
+        "title": "La Cappella Niccolina",
+        "text": "Decora in Vaticano le storie dei santi Stefano e Lorenzo per Niccolò V."
+      },
+      "style": {
+        "title": "La maturità rinascimentale",
+        "text": "Prospettiva, architetture classiche e dignità delle figure esprimono il suo umanesimo cristiano."
+      },
+      "caption": "Beato Angelico, Cappella Niccolina: storie di san Lorenzo",
+      "source": "https://www.museivaticani.va/content/museivaticani/it/collezioni/musei/cappella-niccolina.html",
+      "sourceLabel": "Musei Vaticani",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Angelico,_niccolina_09.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Angelico%2C_niccolina_09.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "author": "see filename or category",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 3,
+        "row": 2
+      },
+      "wallTiles": {
+        "life": 22,
+        "style": 23
+      }
+    },
+    {
+      "id": 12,
+      "date": "1455",
+      "life": {
+        "title": "La morte a Roma",
+        "text": "Muore nel convento di Santa Maria sopra Minerva, dove viene sepolto."
+      },
+      "style": null,
+      "caption": "Tomba di Beato Angelico, Santa Maria sopra Minerva, Roma",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Sm._sopra_minerva,_isaia_da_pisa,_tomba_di_beato_angelico_(1455).JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Sm._sopra_minerva%2C_isaia_da_pisa%2C_tomba_di_beato_angelico_%281455%29.JPG/960px-Sm._sopra_minerva%2C_isaia_da_pisa%2C_tomba_di_beato_angelico_%281455%29.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Sailko",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 0,
+        "row": 3
+      },
+      "wallTiles": {
+        "life": 24,
+        "style": null
+      }
+    },
+    {
+      "id": 13,
+      "date": "1982",
+      "life": {
+        "title": "Il riconoscimento del culto",
+        "text": "Giovanni Paolo II riconosce ufficialmente il culto di fra Giovanni con il titolo di beato."
+      },
+      "style": null,
+      "caption": "Annunciazione di San Marco: immagine dell’arte sacra di Beato Angelico",
+      "source": "https://www.vatican.va/roman_curia/pontifical_commissions/pcchc/documents/rc_com_pcchc_20040218_beato-angelico_it.html",
+      "sourceLabel": "Santa Sede",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Angelico_-_Annunciation_-_San_Marco_north_corridor.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Angelico_-_Annunciation_-_San_Marco_north_corridor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "author": "Fra Angelico",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 1,
+        "row": 3
+      },
+      "wallTiles": {
+        "life": 26,
+        "style": null
+      }
+    },
+    {
+      "id": 14,
+      "date": "1984",
+      "life": {
+        "title": "Patrono degli artisti",
+        "text": "Il 18 febbraio Giovanni Paolo II lo proclama patrono universale degli artisti, specialmente dei pittori."
+      },
+      "style": null,
+      "caption": "Giovanni Paolo II: ritratto illustrativo, non fotografia della proclamazione",
+      "source": "https://www.vatican.va/roman_curia/pontifical_commissions/pcchc/documents/rc_com_pcchc_20040218_beato-angelico_it.html",
+      "sourceLabel": "Santa Sede",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Pope_John_Paul_II_1984_portrait.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Pope_John_Paul_II_1984_portrait.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "author": "Unknown authorUnknown author",
+        "license": "Attribution",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 2,
+        "row": 3
+      },
+      "wallTiles": {
+        "life": 28,
+        "style": null
+      }
+    },
+    {
+      "id": 15,
+      "date": "2025–2026",
+      "life": {
+        "title": "La mostra a Firenze",
+        "text": "Dal 26 settembre 2025 al 25 gennaio 2026 Palazzo Strozzi e Museo di San Marco ne ripercorrono arte e committenze."
+      },
+      "style": null,
+      "caption": "Palazzo Strozzi, Firenze: una delle sedi della mostra",
+      "source": "https://www.palazzostrozzi.org/mostra/angelico/",
+      "sourceLabel": "Fondazione Palazzo Strozzi",
+      "photo": {
+        "page": "https://commons.wikimedia.org/wiki/File:Palazzo_strozzi,_cortile_01.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Palazzo_strozzi%2C_cortile_01.JPG/960px-Palazzo_strozzi%2C_cortile_01.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "sailko",
+        "license": "CC BY 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      },
+      "atlas": {
+        "column": 3,
+        "row": 3
+      },
+      "wallTiles": {
+        "life": 30,
+        "style": null
+      }
+    }
+  ]
+}
