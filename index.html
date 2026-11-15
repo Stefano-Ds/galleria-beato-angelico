@@ -144,7 +144,7 @@ const sun=new THREE.DirectionalLight(0xfff5e6,2);sun.position.set(-18.8,34.05,63
 // Each projector has a perspective-correct rectangular shutter matching its exhibit.
 const toWorld=p=>new THREE.Vector3(p[0],p[2],-p[1]);
 function framedLight(source,target,corners,power,angle=55){
- const l=new THREE.SpotLight(0xffe7bc,power,9,THREE.MathUtils.degToRad(angle),0,2);
+ const l=new THREE.SpotLight(0xfff3e5,power,9,THREE.MathUtils.degToRad(angle),0,2);
  l.position.copy(toWorld(source));l.target.position.copy(toWorld(target));
  l.position.addScaledVector(new THREE.Vector3().subVectors(l.target.position,l.position).normalize(),.08);
  scene.add(l,l.target);l.updateMatrixWorld();l.target.updateMatrixWorld();l.shadow.updateMatrices(l);
@@ -165,19 +165,19 @@ function illuminateGallery(model){
    const side=Math.sign(c.x),x=side<0?box.max.x:box.min.x;
    const target=new THREE.Vector3(x,c.y,c.z);
    const corners=[new THREE.Vector3(x,box.min.y,box.min.z),new THREE.Vector3(x,box.min.y,box.max.z),new THREE.Vector3(x,box.max.y,box.max.z),new THREE.Vector3(x,box.max.y,box.min.z)];
-   framedLight([side*2.75,-c.z,4.55],p(target),corners.map(p),68);
+   framedLight([side*2.75,-c.z,4.55],p(target),corners.map(p),22);
   }else if(mesh.name.startsWith('Confronto_')){
    const z=box.max.z,target=new THREE.Vector3(c.x,c.y,z);
    const corners=[new THREE.Vector3(box.min.x,box.min.y,z),new THREE.Vector3(box.max.x,box.min.y,z),new THREE.Vector3(box.max.x,box.max.y,z),new THREE.Vector3(box.min.x,box.max.y,z)];
-   framedLight([c.x,-z-2.11,4.51],p(target),corners.map(p),64);
+   framedLight([c.x,-z-2.11,4.51],p(target),corners.map(p),20);
   }else if(mesh.name.replaceAll('_',' ').startsWith('Parete linea tempo')){
    const side=Math.sign(c.x),x=side<0?box.max.x:box.min.x,target=new THREE.Vector3(x,c.y,c.z);
    const corners=[new THREE.Vector3(x,box.min.y,box.min.z),new THREE.Vector3(x,box.min.y,box.max.z),new THREE.Vector3(x,box.max.y,box.max.z),new THREE.Vector3(x,box.max.y,box.min.z)];
-   framedLight([side*.5,-c.z,3.8],p(target),corners.map(p),55,68);
+   framedLight([side*.5,-c.z,3.8],p(target),corners.map(p),30,68);
   }
  });
  const tab=model.getObjectByName('Tabernacolo_Root');
- if(tab){const box=new THREE.Box3().setFromObject(tab),c=box.getCenter(new THREE.Vector3()),x=box.max.x,w=(box.max.z-box.min.z)*.68;const p=v=>[v.x,-v.z,v.y];const corners=[new THREE.Vector3(x,box.min.y-.03,c.z-w),new THREE.Vector3(x,box.min.y-.03,c.z+w),new THREE.Vector3(x,box.max.y+.03,c.z+w),new THREE.Vector3(x,box.max.y+.03,c.z-w)];framedLight([-2.75,-c.z,4.55],p(new THREE.Vector3(x,c.y,c.z)),corners.map(p),85)}
+ if(tab){const box=new THREE.Box3().setFromObject(tab),c=box.getCenter(new THREE.Vector3()),x=box.max.x,w=(box.max.z-box.min.z)*.68;const p=v=>[v.x,-v.z,v.y];const corners=[new THREE.Vector3(x,box.min.y-.03,c.z-w),new THREE.Vector3(x,box.min.y-.03,c.z+w),new THREE.Vector3(x,box.max.y+.03,c.z+w),new THREE.Vector3(x,box.max.y+.03,c.z-w)];framedLight([-2.75,-c.z,4.55],p(new THREE.Vector3(x,c.y,c.z)),corners.map(p),24)}
 }
 for(const y of [-6,-2,4,10,16,22,26]){const l=new THREE.PointLight(0xffe4bb,12,10,2);l.position.set(0,4.9,-y);scene.add(l)}
 function limitProjectorsToExhibits(mesh){
