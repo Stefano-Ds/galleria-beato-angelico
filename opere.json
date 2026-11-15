@@ -1,0 +1,129 @@
+{
+  "salaOpere": [
+    {
+      "object": "Opera_01_SEGNAPOSTO",
+      "title": "Giudizio Universale",
+      "image": "giudizio"
+    },
+    {
+      "object": "Tabernacolo_Root",
+      "title": "Tabernacolo dei Linaioli",
+      "image": "tab_aperto"
+    },
+    {
+      "object": "Opera_03_SEGNAPOSTO",
+      "title": "Incoronazione della Vergine · Uffizi",
+      "image": "incoronazione"
+    },
+    {
+      "object": "Opera_04_SEGNAPOSTO",
+      "title": "Deposizione Strozzi",
+      "image": "deposizione"
+    },
+    {
+      "object": "Opera_05_SEGNAPOSTO",
+      "title": "Cristo deriso",
+      "image": "cristo_deriso"
+    }
+  ],
+  "salaConfronto": [
+    {
+      "object": "Confronto_01_SEGNAPOSTO",
+      "title": "Annunciazione · San Marco",
+      "image": "ann_sanmarco"
+    },
+    {
+      "object": "Confronto_02_SEGNAPOSTO",
+      "title": "Annunciazione · Prado",
+      "image": "ann_prado"
+    },
+    {
+      "object": "Confronto_03_SEGNAPOSTO",
+      "title": "Annunciazione · San Giovanni Valdarno",
+      "image": "ann_valdarno"
+    }
+  ],
+  "tabernacolo": {
+    "root": "Tabernacolo_Root",
+    "left": "Tabernacolo_Cerniera_Sinistra",
+    "right": "Tabernacolo_Cerniera_Destra",
+    "openDistance": 3.1,
+    "closeDistance": 4.0,
+    "duration": 1.35,
+    "angleDegrees": 145
+  },
+  "immagini": {
+    "giudizio": {
+      "page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_-_Last_Judgement_-_WGA00467.jpg",
+      "title": "File:Fra Angelico - Last Judgement - WGA00467.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Fra_Angelico_-_Last_Judgement_-_WGA00467.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "author": "Fra Angelico",
+      "license": "Public domain",
+      "licenseUrl": ""
+    },
+    "incoronazione": {
+      "page": "https://commons.wikimedia.org/wiki/File:Angelico_-_Coronation_of_the_Virgin_-_Uffizi_(frame_cropped).jpeg",
+      "title": "File:Angelico - Coronation of the Virgin - Uffizi (frame cropped).jpeg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Angelico_-_Coronation_of_the_Virgin_-_Uffizi_%28frame_cropped%29.jpeg/1920px-Angelico_-_Coronation_of_the_Virgin_-_Uffizi_%28frame_cropped%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Fra Angelico",
+      "license": "Public domain",
+      "licenseUrl": ""
+    },
+    "ann_prado": {
+      "page": "https://commons.wikimedia.org/wiki/File:La_Anunciaci%C3%B3n_(Fra_Angelico-Prado).jpg",
+      "title": "File:La Anunciación (Fra Angelico-Prado).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/La_Anunciaci%C3%B3n_%28Fra_Angelico-Prado%29.jpg/1920px-La_Anunciaci%C3%B3n_%28Fra_Angelico-Prado%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Fra Angelico",
+      "license": "Public domain",
+      "licenseUrl": ""
+    },
+    "ann_valdarno": {
+      "page": "https://commons.wikimedia.org/wiki/File:Annunciation_angelico_valdarno.jpg",
+      "title": "File:Annunciation angelico valdarno.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Annunciation_angelico_valdarno.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "author": "Wikimedia Commons",
+      "license": "Public domain",
+      "licenseUrl": ""
+    },
+    "tab_chiuso": {
+      "page": "https://commons.wikimedia.org/wiki/File:Angelico,_linaioli_tabernacle_01.jpg",
+      "title": "File:Angelico, linaioli tabernacle 01.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Angelico%2C_linaioli_tabernacle_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "author": "Lorenzo Ghiberti / Fra Angelico",
+      "license": "Public domain",
+      "licenseUrl": ""
+    },
+    "ann_sanmarco": {
+      "page": "https://commons.wikimedia.org/wiki/File:Angelico_-_Annunciation_-_San_Marco_north_corridor.jpg",
+      "title": "File:Angelico - Annunciation - San Marco north corridor.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Angelico_-_Annunciation_-_San_Marco_north_corridor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+      "author": "Fra Angelico",
+      "license": "Public domain",
+      "licenseUrl": ""
+    },
+    "deposizione": {
+      "page": "https://commons.wikimedia.org/wiki/File:Beato_angelico,_pala_strozzi_della_deposizione,_con_cuspidi_e_predella_di_lorenzo_monaco,_01.JPG",
+      "title": "File:Beato angelico, pala strozzi della deposizione, con cuspidi e predella di lorenzo monaco, 01.JPG",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Beato_angelico%2C_pala_strozzi_della_deposizione%2C_con_cuspidi_e_predella_di_lorenzo_monaco%2C_01.JPG/960px-Beato_angelico%2C_pala_strozzi_della_deposizione%2C_con_cuspidi_e_predella_di_lorenzo_monaco%2C_01.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Sailko",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    "cristo_deriso": {
+      "page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_-_Mocking_of_Christ_(Cell_7)_-_WGA00541.jpg",
+      "title": "File:Fra Angelico - Mocking of Christ (Cell 7) - WGA00541.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Fra_Angelico_-_Mocking_of_Christ_%28Cell_7%29_-_WGA00541.jpg/960px-Fra_Angelico_-_Mocking_of_Christ_%28Cell_7%29_-_WGA00541.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Fra Angelico",
+      "license": "Public domain",
+      "licenseUrl": ""
+    },
+    "tab_aperto": {
+      "page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_%E2%80%94_Tabernacle_of_the_Linaioli.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Fra_Angelico_%E2%80%94_Tabernacle_of_the_Linaioli.jpg/960px-Fra_Angelico_%E2%80%94_Tabernacle_of_the_Linaioli.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "author": "Gleb Simonov",
+      "license": "Public domain",
+      "licenseUrl": "",
+      "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+    }
+  }
+}

@@ -160,6 +160,7 @@ function illuminateGallery(model){
   if(!mesh.isMesh)return;
   const box=new THREE.Box3().setFromObject(mesh),c=box.getCenter(new THREE.Vector3());
   const p=v=>[v.x,-v.z,v.y];
+  if(mesh.name==='Opera_02_SEGNAPOSTO')return;
   if(mesh.name.startsWith('Opera_')){
    const side=Math.sign(c.x),x=side<0?box.max.x:box.min.x;
    const target=new THREE.Vector3(x,c.y,c.z);
@@ -175,10 +176,12 @@ function illuminateGallery(model){
    framedLight([side*.5,-c.z,3.8],p(target),corners.map(p),55,68);
   }
  });
+ const tab=model.getObjectByName('Tabernacolo_Root');
+ if(tab){const box=new THREE.Box3().setFromObject(tab),c=box.getCenter(new THREE.Vector3()),x=box.max.x,w=(box.max.z-box.min.z)*.68;const p=v=>[v.x,-v.z,v.y];const corners=[new THREE.Vector3(x,box.min.y-.03,c.z-w),new THREE.Vector3(x,box.min.y-.03,c.z+w),new THREE.Vector3(x,box.max.y+.03,c.z+w),new THREE.Vector3(x,box.max.y+.03,c.z-w)];framedLight([-2.75,-c.z,4.55],p(new THREE.Vector3(x,c.y,c.z)),corners.map(p),85)}
 }
 for(const y of [-6,-2,4,10,16,22,26]){const l=new THREE.PointLight(0xffe4bb,12,10,2);l.position.set(0,4.9,-y);scene.add(l)}
 function limitProjectorsToExhibits(mesh){
- const receives=/^(Opera_|Confronto_|04_LINEA_DEL_TEMPO|Cronologia_)/.test(mesh.name)||mesh.name.replaceAll('_',' ').startsWith('Parete linea tempo');
+ const receives=/^(Opera_|Confronto_|04_LINEA_DEL_TEMPO|Cronologia_|Tabernacolo_)/.test(mesh.name)||mesh.name.replaceAll('_',' ').startsWith('Parete linea tempo');
  if(receives)return;
  const restrict=material=>{const m=material.clone();m.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_begin>',THREE.ShaderChunk.lights_fragment_begin.replace('getSpotLightInfo( spotLight, geometryPosition, directLight );','getSpotLightInfo( spotLight, geometryPosition, directLight ); directLight.color = vec3(0.0);'))};m.customProgramCacheKey=()=>'gallery-unlit-by-projectors-1';return m};
  mesh.material=Array.isArray(mesh.material)?mesh.material.map(restrict):restrict(mesh.material);
@@ -223,7 +226,26 @@ let timelineDrag=null;timelineViewport.addEventListener('pointerdown',e=>{if(e.t
 function updateRing(now){if(!chronology)return;const r=chronology.ring,inside=Math.hypot(pos.x-r.x,pos.y-r.y)<=r.radius;if(!inside){ringStarted=null;ringArmed=true;$('ringPrompt').hidden=true;return}if(!ringArmed)return;if(ringStarted===null)ringStarted=now;const elapsed=(now-ringStarted)/1000;$('ringPrompt').hidden=false;$('ringProgress').value=Math.min(r.seconds,elapsed);if(elapsed>=r.seconds)openTimeline()}
 renderer.domElement.addEventListener('click',e=>{if(!running||!chronology)return;const point=document.pointerLockElement?new THREE.Vector2(0,0):new THREE.Vector2(e.clientX/innerWidth*2-1,-e.clientY/innerHeight*2+1);raycaster.setFromCamera(point,camera);const hit=raycaster.intersectObjects(timelineMeshes,false)[0];if(hit&&hit.distance<9)openTimeline(hit.object.userData.timelineEvent)});
 
-reset();let previous=performance.now(),lastFrame=0;renderer.setAnimationLoop(now=>{const dt=Math.min(.05,(now-previous)/1000);previous=now;if(running){const f=Number(keys.has('KeyW')||keys.has('ArrowUp'))-Number(keys.has('KeyS')||keys.has('ArrowDown'))+joy.y,r=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'))+joy.x;const k=(keys.has('ShiftLeft')||keys.has('ShiftRight')?3.5:1.8)*dt/Math.max(1,Math.hypot(f,r));move((Math.sin(yaw)*f+Math.cos(yaw)*r)*k,(Math.cos(yaw)*f-Math.sin(yaw)*r)*k);sync();updateRing(now)}if((running||dirty)&&now-lastFrame>=33){renderer.render(scene,camera);dirty=false;lastFrame=now}});
-try{const results=await Promise.all([fetch('./galleria.glb',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('modello');return r.arrayBuffer()}).then(buffer=>new GLTFLoader().parseAsync(buffer,new URL('.',location.href).href)),fetch('./collisioni.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('collisioni');return r.json()}),fetch('./cronologia.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('cronologia');return r.json()}),fetch('./cronologia-foto.jpg',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('immagini');return r.blob()})]);boxes=results[1];document.documentElement.style.setProperty('--timeline-photos',`url("${URL.createObjectURL(results[3])}")`);buildTimeline(results[2]);results[0].scene.traverse(o=>{if(o.isMesh){const eventMatch=o.name.match(/^Cronologia_(?:Vita|Stile|Data)_(\d+)/);if(eventMatch){o.userData.timelineEvent=Number(eventMatch[1]);timelineMeshes.push(o)}limitProjectorsToExhibits(o);o.receiveShadow=true;o.castShadow=!o.name.includes('Ciuffi')&&!o.name.includes('Prato')}});scene.add(results[0].scene);illuminateGallery(results[0].scene);renderer.shadowMap.needsUpdate=true;dirty=true;ready=true;enter.disabled=false;enter.textContent='Entra';status.textContent=touch?'Usa il joystick per camminare e trascina per guardarti intorno.':'Cammina con W A S D o le frecce. Muovi il mouse per guardarti intorno.';}catch(e){console.error(e);enter.textContent='Riprova';enter.disabled=false;enter.onclick=()=>location.reload();status.textContent='Caricamento non riuscito. Controlla la connessione e riprova.'}
+
+let tabernacoloActor=null;
+function setupTabernacolo(model,config){
+ const settings=config.tabernacolo,root=model.getObjectByName(settings.root),left=model.getObjectByName(settings.left),right=model.getObjectByName(settings.right);
+ if(!root||!left||!right)throw Error('Ante del tabernacolo mancanti');
+ model.updateMatrixWorld(true);
+ const hinge=o=>({object:o,bind:o.quaternion.clone(),axis:new THREE.Vector3(0,1,0).applyQuaternion(o.parent.getWorldQuaternion(new THREE.Quaternion()).invert()).normalize()});
+ tabernacoloActor={root,left:hinge(left),right:hinge(right),settings,progress:0,target:0};
+}
+function updateTabernacolo(dt){
+ if(!tabernacoloActor)return false;const t=tabernacoloActor,c=t.root.getWorldPosition(new THREE.Vector3()),distance=Math.hypot(camera.position.x-c.x,camera.position.z-c.z);
+ if(distance<t.settings.openDistance)t.target=1;else if(distance>t.settings.closeDistance)t.target=0;
+ const old=t.progress,step=dt/t.settings.duration;t.progress=t.target>old?Math.min(t.target,old+step):Math.max(t.target,old-step);
+ const eased=t.progress*t.progress*(3-2*t.progress),angle=THREE.MathUtils.degToRad(t.settings.angleDegrees)*eased;
+ for(const [hinge,sign] of [[t.left,-1],[t.right,1]])hinge.object.quaternion.copy(new THREE.Quaternion().setFromAxisAngle(hinge.axis,sign*angle)).multiply(hinge.bind);
+ renderer.domElement.dataset.tabernacolo=JSON.stringify({apertura:Math.round(eased*1000)/1000,distanza:Math.round(distance*100)/100});
+ return old!==t.progress;
+}
+
+reset();let previous=performance.now(),lastFrame=0;renderer.setAnimationLoop(now=>{const dt=Math.min(.05,(now-previous)/1000);previous=now;if(running){const f=Number(keys.has('KeyW')||keys.has('ArrowUp'))-Number(keys.has('KeyS')||keys.has('ArrowDown'))+joy.y,r=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'))+joy.x;const k=(keys.has('ShiftLeft')||keys.has('ShiftRight')?3.5:1.8)*dt/Math.max(1,Math.hypot(f,r));move((Math.sin(yaw)*f+Math.cos(yaw)*r)*k,(Math.cos(yaw)*f-Math.sin(yaw)*r)*k);sync();updateRing(now)}const tabMoving=updateTabernacolo(dt);if((running||dirty||tabMoving)&&now-lastFrame>=33){renderer.render(scene,camera);dirty=false;lastFrame=now}});
+try{const results=await Promise.all([fetch('./galleria.glb',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('modello');return r.arrayBuffer()}).then(buffer=>new GLTFLoader().parseAsync(buffer,new URL('.',location.href).href)),fetch('./collisioni.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('collisioni');return r.json()}),fetch('./cronologia.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('cronologia');return r.json()}),fetch('./cronologia-foto.jpg',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('immagini');return r.blob()}),fetch('./opere.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('opere');return r.json()})]);boxes=results[1];document.documentElement.style.setProperty('--timeline-photos',`url("${URL.createObjectURL(results[3])}")`);buildTimeline(results[2]);results[0].scene.traverse(o=>{if(o.isMesh){const eventMatch=o.name.match(/^Cronologia_(?:Vita|Stile|Data)_(\d+)/);if(eventMatch){o.userData.timelineEvent=Number(eventMatch[1]);timelineMeshes.push(o)}limitProjectorsToExhibits(o);o.receiveShadow=true;o.castShadow=!o.name.includes('Ciuffi')&&!o.name.includes('Prato')&&!o.name.startsWith('Tabernacolo_Anta')}});scene.add(results[0].scene);setupTabernacolo(results[0].scene,results[4]);illuminateGallery(results[0].scene);renderer.shadowMap.needsUpdate=true;dirty=true;ready=true;enter.disabled=false;enter.textContent='Entra';status.textContent=touch?'Usa il joystick per camminare e trascina per guardarti intorno.':'Cammina con W A S D o le frecce. Muovi il mouse per guardarti intorno.';}catch(e){console.error(e);enter.textContent='Riprova';enter.disabled=false;enter.onclick=()=>location.reload();status.textContent='Caricamento non riuscito. Controlla la connessione e riprova.'}
 </script>
 </body></html>

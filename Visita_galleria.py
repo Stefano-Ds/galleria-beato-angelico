@@ -84,6 +84,8 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
         self.area=context.area;self.region=context.region;self.rv=context.space_data.region_3d
         self.pos=Vector((0,-13.0,EYE));self.yaw=0.;self.pitch=-.10;self.keys=set()
         self.boxes=build_obstacles(context);self.last=time.perf_counter()
+        self.tabernacolo=bpy.data.objects.get('Tabernacolo_Root');self.tabernacolo_target=0.;self.tabernacolo_progress=0.
+        if self.tabernacolo:self.tabernacolo['apertura']=0.
         self.chronology=timeline_data();self.timeline_open=False;self.timeline_offset=0.;self.timeline_drag=None;self.ring_entered=None;self.ring_armed=True;self.timeline_texture=None
         self.timeline_handler=bpy.types.SpaceView3D.draw_handler_add(self.draw_timeline,(),'WINDOW','POST_PIXEL')
         self.cx=self.region.x+self.region.width//2;self.cy=self.region.y+self.region.height//2
@@ -173,6 +175,14 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
                 dx=(math.sin(self.yaw)*f+math.cos(self.yaw)*r)*k
                 dy=(math.cos(self.yaw)*f-math.sin(self.yaw)*r)*k
                 move(self.pos,dx,dy,self.boxes);self.update_view()
+            if self.tabernacolo:
+                distance=math.hypot(self.pos.x-self.tabernacolo.location.x,self.pos.y-self.tabernacolo.location.y)
+                if distance<self.tabernacolo.get('distanza_apertura',3.1):self.tabernacolo_target=1.
+                elif distance>self.tabernacolo.get('distanza_chiusura',4.):self.tabernacolo_target=0.
+                step=dt/1.35;old=self.tabernacolo_progress
+                self.tabernacolo_progress=min(self.tabernacolo_target,old+step) if self.tabernacolo_target>old else max(self.tabernacolo_target,old-step)
+                if abs(old-self.tabernacolo_progress)>1e-6:
+                    t=self.tabernacolo_progress;self.tabernacolo['apertura']=t*t*(3-2*t);self.tabernacolo.update_tag();context.view_layer.update();self.area.tag_redraw()
             if self.chronology:
                 ring=self.chronology['ring'];inside=math.hypot(self.pos.x-ring['x'],self.pos.y-ring['y'])<=ring['radius']
                 if not inside:self.ring_entered=None;self.ring_armed=True
