@@ -139,17 +139,25 @@ const scene=new THREE.Scene();scene.background=new THREE.Color('#d9e7ed');scene.
 const skyFaces=['#cbd9df','#cbd9df','#edf4f8','#8c9677','#d7e2e6','#d7e2e6'].map(color=>{const c=document.createElement('canvas');c.width=c.height=16;const ctx=c.getContext('2d');ctx.fillStyle=color;ctx.fillRect(0,0,16,16);return c});
 const env=new THREE.CubeTexture(skyFaces);env.colorSpace=THREE.SRGBColorSpace;env.needsUpdate=true;const pmrem=new THREE.PMREMGenerator(renderer);scene.environment=pmrem.fromCubemap(env).texture;scene.environmentIntensity=.24;pmrem.dispose();
 const camera=new THREE.PerspectiveCamera(68,innerWidth/innerHeight,.06,100);camera.rotation.order='YXZ';
-const ambient=new THREE.HemisphereLight(0xffedcf,0x9b7958,.55);scene.add(ambient);
+const ambient=new THREE.HemisphereLight(0xfff6ed,0x8d7c6b,.55);scene.add(ambient);
 const sun=new THREE.DirectionalLight(0xfff5e6,2);sun.position.set(-18.8,34.05,63.5);sun.target.position.set(0,0,8);scene.add(sun.target);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-24,right:24,top:29,bottom:-29,near:1,far:110});sun.shadow.bias=-.00015;sun.shadow.normalBias=.025;scene.add(sun);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.shadowMap.autoUpdate=false;
 // Each projector has a perspective-correct rectangular shutter matching its exhibit.
 const toWorld=p=>new THREE.Vector3(p[0],p[2],-p[1]);
 function framedLight(source,target,corners,power,angle=55){
- const l=new THREE.SpotLight(0xfff3e5,power,9,THREE.MathUtils.degToRad(angle),0,2);
+ const l=new THREE.SpotLight(0xfff8f0,power,9,THREE.MathUtils.degToRad(angle),0,2);
  l.position.copy(toWorld(source));l.target.position.copy(toWorld(target));
  l.position.addScaledVector(new THREE.Vector3().subVectors(l.target.position,l.position).normalize(),.08);
  scene.add(l,l.target);l.updateMatrixWorld();l.target.updateMatrixWorld();l.shadow.updateMatrices(l);
  const canvas=document.createElement('canvas');canvas.width=canvas.height=512;const ctx=canvas.getContext('2d');ctx.fillStyle='#000';ctx.fillRect(0,0,512,512);ctx.fillStyle='#fff';ctx.beginPath();
  corners.forEach((point,i)=>{const uv=toWorld(point).applyMatrix4(l.shadow.matrix);const x=uv.x*512,y=(1-uv.y)*512;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.closePath();ctx.fill();
+ // Compensate distance and incidence so the top of a painting is not brighter than its lower half.
+ const worldCorners=corners.map(toWorld),plane=new THREE.Plane().setFromCoplanarPoints(worldCorners[0],worldCorners[1],worldCorners[2]);
+ const gain=p=>{const delta=new THREE.Vector3().subVectors(l.position,p),distance=delta.length();return distance*distance/Math.max(.03,Math.abs(plane.normal.dot(delta.divideScalar(distance))))};
+ const maximumGain=Math.max(...worldCorners.map(gain)),centreGain=gain(l.target.position);
+ const pixels=ctx.getImageData(0,0,512,512),inverse=l.shadow.matrix.clone().invert(),origin=l.position.clone(),ray=new THREE.Vector3();
+ const planeDistance=plane.normal.dot(origin)+plane.constant;
+ for(let y=0;y<512;y++)for(let x=0;x<512;x++){const i=(y*512+x)*4;if(!pixels.data[i])continue;ray.set((x+.5)/512,1-(y+.5)/512,.5).applyMatrix4(inverse).sub(origin).normalize();const incidence=plane.normal.dot(ray),distance=-planeDistance/incidence;const correction=Math.min(1,distance*distance/Math.max(.03,Math.abs(incidence))/maximumGain);const grey=Math.round(pixels.data[i]*correction);pixels.data[i]=pixels.data[i+1]=pixels.data[i+2]=grey}
+ ctx.putImageData(pixels,0,0);l.intensity=power*maximumGain/centreGain*.85;
  const mask=new THREE.CanvasTexture(canvas);mask.minFilter=THREE.LinearFilter;mask.magFilter=THREE.LinearFilter;mask.generateMipmaps=false;l.map=mask;
  return l;
 }
@@ -182,6 +190,7 @@ function illuminateGallery(model){
 for(const y of [-6,-2,4,10,16,22,26]){const l=new THREE.PointLight(0xffe4bb,12,10,2);l.position.set(0,4.9,-y);scene.add(l)}
 function limitProjectorsToExhibits(mesh){
  const receives=/^(Opera_|Confronto_|04_LINEA_DEL_TEMPO|Cronologia_|Tabernacolo_)/.test(mesh.name)||mesh.name.replaceAll('_',' ').startsWith('Parete linea tempo');
+ if(/^(Opera_|Confronto_|Tabernacolo_Anta)/.test(mesh.name)){for(const m of Array.isArray(mesh.material)?mesh.material:[mesh.material]){m.roughness=1;m.metalness=0;m.envMapIntensity=.12;if('specularIntensity' in m)m.specularIntensity=.15}}
  if(receives)return;
  const restrict=material=>{const m=material.clone();m.onBeforeCompile=shader=>{shader.fragmentShader=shader.fragmentShader.replace('#include <lights_fragment_begin>',THREE.ShaderChunk.lights_fragment_begin.replace('getSpotLightInfo( spotLight, geometryPosition, directLight );','getSpotLightInfo( spotLight, geometryPosition, directLight ); directLight.color = vec3(0.0);'))};m.customProgramCacheKey=()=>'gallery-unlit-by-projectors-1';return m};
  mesh.material=Array.isArray(mesh.material)?mesh.material.map(restrict):restrict(mesh.material);
