@@ -23,7 +23,7 @@ def valid(x,y,boxes):
     # The walkable space is the museum plus its neutral entrance apron.
     for i in range(16):
         t=math.tau*i/16;px=x+RADIUS*math.cos(t);py=y+RADIUS*math.sin(t)
-        if not ((-5<=px<=5 and 0<=py<=27) or (-4<=px<=4 and -8<=py<=0) or (-4<=px<=4 and -14<=py<=-8)):
+        if not ((-5<=px<=5 and 0<=py<=18) or (-3.5<=px<=3.5 and 18<=py<=24) or (-4<=px<=4 and -8<=py<=0) or (-4<=px<=4 and -14<=py<=-8)):
             return False
     for x0,x1,y0,y1 in boxes:
         nx=max(x0,min(x,x1));ny=max(y0,min(y,y1))
