@@ -43,7 +43,7 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
     def invoke(self,context,event):
         if context.area.type!='VIEW_3D':return {'CANCELLED'}
         self.area=context.area;self.region=context.region;self.rv=context.space_data.region_3d
-        self.pos=Vector((0,-12.5,EYE));self.yaw=0.;self.pitch=0.;self.keys=set()
+        self.pos=Vector((0,-13.0,EYE));self.yaw=0.;self.pitch=-.10;self.keys=set()
         self.boxes=build_obstacles(context);self.last=time.perf_counter()
         self.cx=self.region.x+self.region.width//2;self.cy=self.region.y+self.region.height//2
         self.rv.view_perspective='PERSP';context.space_data.overlay.show_overlays=False
