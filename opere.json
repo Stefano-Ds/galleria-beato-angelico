@@ -125,5 +125,200 @@
       "licenseUrl": "",
       "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
     }
-  }
+  },
+  "schede": [
+    {
+      "id": "linaioli",
+      "object": "Tabernacolo_Root",
+      "title": "Tabernacolo dei Linaioli",
+      "subtitle": "1433–1435 · Museo di San Marco, Firenze",
+      "image": "tab_aperto",
+      "ring": {
+        "x": -2.95,
+        "y": 9,
+        "radius": 0.55,
+        "seconds": 3
+      },
+      "paragraphs": [
+        "Beato Angelico dipinse il tabernacolo per l’Arte dei Linaioli e Rigattieri. La cornice marmorea fu progettata da Lorenzo Ghiberti. L’insieme unisce pittura e architettura in una grande edicola, alta circa cinque metri.",
+        "Al centro, la Madonna col Bambino siede in trono sotto un baldacchino di stoffe preziose: un richiamo all’attività dei committenti. Dodici angeli musicanti circondano la scena.",
+        "Gli sportelli mostrano all’interno san Giovanni Battista e san Marco, all’esterno san Pietro e san Marco. La predella racconta episodi dei santi protettori e l’Adorazione dei Magi."
+      ],
+      "sources": [
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit"
+      ],
+      "tile": 0,
+      "imageCredit": {
+        "page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_%E2%80%94_Tabernacle_of_the_Linaioli.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Fra_Angelico_%E2%80%94_Tabernacle_of_the_Linaioli.jpg/960px-Fra_Angelico_%E2%80%94_Tabernacle_of_the_Linaioli.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Gleb Simonov",
+        "license": "Public domain",
+        "licenseUrl": "",
+        "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+      }
+    },
+    {
+      "id": "incoronazione",
+      "object": "Opera_03_SEGNAPOSTO",
+      "title": "Incoronazione della Vergine",
+      "subtitle": "Uffizi, Firenze",
+      "image": "incoronazione",
+      "ring": {
+        "x": -2.95,
+        "y": 14.4,
+        "radius": 0.55,
+        "seconds": 3
+      },
+      "paragraphs": [
+        "Luce, armonia e spiritualità caratterizzano questa rappresentazione dell’Incoronazione della Vergine."
+      ],
+      "sources": [
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit"
+      ],
+      "tile": 1,
+      "imageCredit": {
+        "page": "https://commons.wikimedia.org/wiki/File:Angelico_-_Coronation_of_the_Virgin_-_Uffizi_(frame_cropped).jpeg",
+        "title": "File:Angelico - Coronation of the Virgin - Uffizi (frame cropped).jpeg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Angelico_-_Coronation_of_the_Virgin_-_Uffizi_%28frame_cropped%29.jpeg/1920px-Angelico_-_Coronation_of_the_Virgin_-_Uffizi_%28frame_cropped%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Fra Angelico",
+        "license": "Public domain",
+        "licenseUrl": ""
+      }
+    },
+    {
+      "id": "deposizione",
+      "object": "Opera_04_SEGNAPOSTO",
+      "title": "Deposizione Strozzi",
+      "subtitle": "",
+      "image": "deposizione",
+      "ring": {
+        "x": 2.95,
+        "y": 5.6,
+        "radius": 0.55,
+        "seconds": 3
+      },
+      "paragraphs": [
+        "La narrazione sacra si concentra sull’espressività delle figure."
+      ],
+      "sources": [
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit"
+      ],
+      "tile": 2,
+      "imageCredit": {
+        "page": "https://commons.wikimedia.org/wiki/File:Beato_angelico,_pala_strozzi_della_deposizione,_con_cuspidi_e_predella_di_lorenzo_monaco,_01.JPG",
+        "title": "File:Beato angelico, pala strozzi della deposizione, con cuspidi e predella di lorenzo monaco, 01.JPG",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Beato_angelico%2C_pala_strozzi_della_deposizione%2C_con_cuspidi_e_predella_di_lorenzo_monaco%2C_01.JPG/960px-Beato_angelico%2C_pala_strozzi_della_deposizione%2C_con_cuspidi_e_predella_di_lorenzo_monaco%2C_01.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Sailko",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+      }
+    },
+    {
+      "id": "cristo",
+      "object": "Opera_05_SEGNAPOSTO",
+      "title": "Cristo deriso",
+      "subtitle": "",
+      "image": "cristo_deriso",
+      "ring": {
+        "x": 2.95,
+        "y": 12.6,
+        "radius": 0.55,
+        "seconds": 3
+      },
+      "paragraphs": [
+        "L’essenzialità della composizione invita alla meditazione sulla Passione di Cristo."
+      ],
+      "sources": [
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit"
+      ],
+      "tile": 3,
+      "imageCredit": {
+        "page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_-_Mocking_of_Christ_(Cell_7)_-_WGA00541.jpg",
+        "title": "File:Fra Angelico - Mocking of Christ (Cell 7) - WGA00541.jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/10/Fra_Angelico_-_Mocking_of_Christ_%28Cell_7%29_-_WGA00541.jpg/960px-Fra_Angelico_-_Mocking_of_Christ_%28Cell_7%29_-_WGA00541.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Fra Angelico",
+        "license": "Public domain",
+        "licenseUrl": ""
+      }
+    },
+    {
+      "id": "sanmarco",
+      "object": "Confronto_01_SEGNAPOSTO",
+      "title": "Annunciazione di San Marco",
+      "subtitle": "Intorno al 1440 · Firenze",
+      "image": "ann_sanmarco",
+      "ring": {
+        "x": -1.9,
+        "y": 21.1,
+        "radius": 0.55,
+        "seconds": 3
+      },
+      "paragraphs": [
+        "L’affresco accoglie chi sale al primo piano del convento di San Marco. Gabriele e Maria, sotto un loggiato austero, incrociano le braccia sul petto in segno di umiltà e accettazione della volontà divina.",
+        "La scena è spostata verso destra per lasciare spazio al giardino recintato, simbolo della purezza della Vergine. La prospettiva ordinata e i corpi solidi mostrano l’incontro con la nuova pittura rinascimentale.",
+        "Rispetto alla pala del Prado, scompaiono la Cacciata di Adamo ed Eva e molti ornamenti preziosi. L’ambientazione spoglia e la luce diffusa rendono l’immagine più raccolta e adatta alla meditazione."
+      ],
+      "sources": [
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit",
+        "https://docs.google.com/document/d/142anmH7OApcByKWkyXGSSVulmRKppCD1R-TGTI2ugeE/edit"
+      ],
+      "tile": 4,
+      "imageCredit": {
+        "page": "https://commons.wikimedia.org/wiki/File:Angelico_-_Annunciation_-_San_Marco_north_corridor.jpg",
+        "title": "File:Angelico - Annunciation - San Marco north corridor.jpg",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Angelico_-_Annunciation_-_San_Marco_north_corridor.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+        "author": "Fra Angelico",
+        "license": "Public domain",
+        "licenseUrl": ""
+      }
+    },
+    {
+      "id": "prado",
+      "object": "Confronto_02_SEGNAPOSTO",
+      "title": "Annunciazione del Prado",
+      "subtitle": "Intorno al 1425–1426 · Madrid",
+      "image": "ann_prado",
+      "ring": {
+        "x": 0,
+        "y": 22.35,
+        "radius": 0.55,
+        "seconds": 3
+      },
+      "paragraphs": [
+        "La pala a tempera su tavola fu realizzata per il convento di San Domenico a Fiesole. A sinistra, Adamo ed Eva vengono cacciati dal Paradiso; a destra, l’annuncio dell’angelo a Maria apre il cammino della Redenzione.",
+        "Il loggiato è costruito secondo le regole della prospettiva. Il giardino, le stoffe dorate e le ali variopinte conservano invece la preziosità e l’attenzione al dettaglio della tradizione tardogotica.",
+        "Un raggio dorato accompagna la colomba dello Spirito Santo verso Maria. In confronto all’affresco di San Marco, questa tavola presenta una narrazione più ricca di episodi, simboli e decorazioni."
+      ],
+      "sources": [
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit",
+        "https://docs.google.com/document/d/142anmH7OApcByKWkyXGSSVulmRKppCD1R-TGTI2ugeE/edit"
+      ],
+      "tile": 5,
+      "imageCredit": {
+        "page": "https://commons.wikimedia.org/wiki/File:La_Anunciaci%C3%B3n_(Fra_Angelico-Prado).jpg",
+        "title": "File:La Anunciación (Fra Angelico-Prado).jpg",
+        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/La_Anunciaci%C3%B3n_%28Fra_Angelico-Prado%29.jpg/1920px-La_Anunciaci%C3%B3n_%28Fra_Angelico-Prado%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "author": "Fra Angelico",
+        "license": "Public domain",
+        "licenseUrl": ""
+      }
+    }
+  ],
+  "schedeAtlas": {
+    "file": "schede-opere.jpg",
+    "columns": 3,
+    "rows": 2,
+    "cellWidth": 800,
+    "cellHeight": 1000
+  },
+  "schedeAssenti": [
+    {
+      "object": "Opera_01_SEGNAPOSTO",
+      "reason": "Testo segnaposto nel Canva; nessuna descrizione specifica nel documento."
+    },
+    {
+      "object": "Confronto_03_SEGNAPOSTO",
+      "reason": "Opera esposta: San Giovanni Valdarno. I materiali descrivono Cortona."
+    }
+  ]
 }

@@ -114,7 +114,13 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 .tl-header{height:76px}.tl-footer{height:56px}#timelineViewport{height:calc(100dvh - 132px)}#timelineTrack{min-height:482px}.tl-card{overflow:visible;min-height:0}.tl-card h3{font-size:16px;line-height:1.2}.tl-card p{font-size:12.5px;line-height:1.35}.tl-photo{height:clamp(64px,11vh,94px)}
 </style>
 <script type="importmap">{"imports":{"three":"./three.module.js"}}</script>
-</head>
+<style>
+#artDialog{padding:0;border:0;width:100vw;height:100dvh;max-width:none;max-height:none;margin:0;background:linear-gradient(135deg,#e9e1db,#e6d2c3 70%,#dba88e);color:#593d2d;font-family:Georgia,serif}
+#artDialog::backdrop{background:#201b16c9}#artDialog header{display:flex;align-items:flex-start;gap:20px;justify-content:space-between;padding:22px 30px;border-bottom:1px solid #976c4e38}#artTitle{font:400 clamp(27px,4vw,42px)/1.15 Georgia,serif;margin:0 0 9px}#artSubtitle{margin:0;font:14px/1.4 system-ui;color:#6d4d39}.art-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.8fr);gap:32px;padding:26px 32px;height:calc(100% - 125px);overflow:auto;box-sizing:border-box}.art-picture{min-height:0;margin:0;display:flex;align-items:center;justify-content:center}#artImage{width:100%;height:100%;max-height:calc(100dvh - 185px);object-fit:contain}.art-copy{overflow:auto;padding:0 14px 20px 0}.art-copy p{font:18px/1.65 Georgia,serif;margin:0 0 20px;max-width:66ch}#artRingPrompt{position:fixed;bottom:68px;left:50%;transform:translateX(-50%);padding:12px 20px;background:#ead5c3f2;color:#633d29;z-index:3;border-radius:8px;font:14px system-ui;text-align:center;pointer-events:none;max-width:80vw}#artRingPrompt[hidden]{display:none}#artRingPrompt progress{display:block;width:min(240px,65vw);height:7px;margin:8px auto 0;accent-color:#895636}body.art-open #tools,body.art-open #hint,body.art-open #dot,body.art-open #pad{display:none}
+@media(max-width:700px){#artDialog header{padding:20px}.art-layout{display:block;padding:20px;height:calc(100% - 125px)}.art-picture{height:45dvh;margin-bottom:22px}#artImage{max-height:45dvh}.art-copy{overflow:visible;padding:0}.art-copy p{font-size:17px}}
+
+#artDialog[open]{display:flex;flex-direction:column;overflow:hidden}#artDialog header{flex:none}.art-layout{flex:1;min-height:0;height:auto}
+</style></head>
 <body>
 <div id="cover"><div id="card"><h1>Galleria Beato Angelico</h1><button id="enter" disabled>Caricamento…</button><p id="status" role="status">Preparazione della visita</p></div></div>
 <div id="tools"><button id="reset" aria-label="Torna all'ingresso" title="Torna all’ingresso">↺</button><button id="full" aria-label="Schermo intero" title="Schermo intero">⛶</button><button id="pause" aria-label="Pausa" title="Pausa">Ⅱ</button></div>
@@ -126,6 +132,8 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 <div id="timelineViewport" tabindex="0" aria-label="Linea del tempo scorrevole, usa le frecce destra e sinistra"><div id="timelineTrack"></div></div>
 <footer class="tl-footer"><p>Scorri, trascina o usa ← → · Esc per chiudere</p><nav aria-label="Scorri la linea del tempo"><button id="timelinePrevious" aria-label="Scorri a sinistra">←</button><button id="timelineNext" aria-label="Scorri a destra">→</button></nav></footer>
 </dialog>
+<div id="artRingPrompt" hidden><span id="artRingLabel"></span><progress id="artRingProgress" max="3" value="0" aria-label="Attesa apertura scheda opera"></progress></div>
+<dialog id="artDialog" aria-labelledby="artTitle"><header><div><h2 id="artTitle"></h2><p id="artSubtitle"></p></div><button class="tl-close" id="artClose" aria-label="Chiudi la scheda dell’opera">×</button></header><div class="art-layout"><figure class="art-picture"><img id="artImage" alt=""></figure><article class="art-copy" id="artCopy"></article></div></dialog>
 <script type="module">
 import * as THREE from 'three';
 import {GLTFLoader} from './GLTFLoader.js';
@@ -210,7 +218,7 @@ const radius=.28;
 function valid(x,y){for(let i=0;i<16;i++){const t=Math.PI*2*i/16,px=x+radius*Math.cos(t),py=y+radius*Math.sin(t);if(!((px>=-5&&px<=5&&py>=0&&py<=18)||(px>=-3.5&&px<=3.5&&py>=18&&py<=24)||(px>=-4&&px<=4&&py>=-8&&py<=0)||(px>=-4&&px<=4&&py>=-14&&py<=-8)))return false}for(const [x0,x1,y0,y1]of boxes){const nx=Math.max(x0,Math.min(x,x1)),ny=Math.max(y0,Math.min(y,y1));if((x-nx)**2+(y-ny)**2<radius**2)return false}return true}
 function move(dx,dy){const n=Math.max(1,Math.ceil(Math.hypot(dx,dy)/.055));for(let i=0;i<n;i++){if(valid(pos.x+dx/n,pos.y))pos.x+=dx/n;if(valid(pos.x,pos.y+dy/n))pos.y+=dy/n}}
 function look(dx,dy){yaw+=dx*.0025;pitch=Math.max(-1.3,Math.min(1.3,pitch-dy*.0025));sync()}
-function stop(){running=false;keys.clear();joy.x=joy.y=0;document.body.classList.remove('running');enter.textContent='Riprendi';if(document.pointerLockElement)document.exitPointerLock()}
+function stop(){clearArtDwell();running=false;keys.clear();joy.x=joy.y=0;document.body.classList.remove('running');enter.textContent='Riprendi';if(document.pointerLockElement)document.exitPointerLock()}
 async function start(){if(!ready)return;running=true;document.body.classList.add('running');if(!touch){try{await renderer.domElement.requestPointerLock()}catch(e){/* Drag-to-look remains available when pointer lock is unavailable. */}}}
 enter.onclick=start;$('pause').onclick=stop;$('reset').onclick=reset;
 $('full').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){}};
@@ -242,6 +250,35 @@ function updateRing(now){if(!chronology)return;const r=chronology.ring,inside=Ma
 renderer.domElement.addEventListener('click',e=>{if(!running||!chronology)return;const point=document.pointerLockElement?new THREE.Vector2(0,0):new THREE.Vector2(e.clientX/innerWidth*2-1,-e.clientY/innerHeight*2+1);raycaster.setFromCamera(point,camera);const hit=raycaster.intersectObjects(timelineMeshes,false)[0];if(hit&&hit.distance<9)openTimeline(hit.object.userData.timelineEvent)});
 
 
+
+let artCards=[],artStarted=null,artCurrent=null,artBlocked=null;
+const artDialog=$('artDialog'),artPrompt=$('artRingPrompt');
+function setupArtCards(config,atlas){
+ artCards=(config.schede||[]).map(card=>{
+  const canvas=document.createElement('canvas');canvas.width=config.schedeAtlas.cellWidth;canvas.height=config.schedeAtlas.cellHeight;
+  canvas.getContext('2d').drawImage(atlas,(card.tile%3)*canvas.width,Math.floor(card.tile/3)*canvas.height,canvas.width,canvas.height,0,0,canvas.width,canvas.height);
+  return {...card,photo:canvas.toDataURL('image/jpeg',.92)};
+ });
+}
+function clearArtDwell(){artStarted=null;artCurrent=null;if(artPrompt)artPrompt.hidden=true}
+function openArtCard(card){
+ if(artDialog.open||timelineDialog.open)return;
+ artBlocked=card.id;stop();$('artTitle').textContent=card.title;$('artSubtitle').textContent=card.subtitle;$('artSubtitle').hidden=!card.subtitle;
+ $('artCopy').replaceChildren(...card.paragraphs.map(text=>element('p','',text)));
+ $('artImage').src=card.photo;$('artImage').alt=card.title;$('artImage').title=[card.imageCredit.author,card.imageCredit.license].filter(Boolean).join(' · ');
+ document.body.classList.add('art-open');artDialog.showModal();$('artClose').focus();$('artCopy').scrollTop=0;artDialog.querySelector('.art-layout').scrollTop=0;
+}
+function closeArtCard(){artDialog.close();document.body.classList.remove('art-open');clearArtDwell();enter.textContent='Riprendi';enter.focus()}
+$('artClose').onclick=closeArtCard;artDialog.addEventListener('cancel',e=>{e.preventDefault();closeArtCard()});
+function updateArtRings(now){
+ const card=artCards.find(card=>Math.hypot(pos.x-card.ring.x,pos.y-card.ring.y)<=card.ring.radius);
+ if(artBlocked&&!artCards.some(c=>c.id===artBlocked&&Math.hypot(pos.x-c.ring.x,pos.y-c.ring.y)<=c.ring.radius))artBlocked=null;
+ if(!card||artBlocked===card.id||artDialog.open||timelineDialog.open){clearArtDwell();return}
+ if(artCurrent!==card.id){artCurrent=card.id;artStarted=now}
+ const elapsed=(now-artStarted)/1000;artPrompt.hidden=false;$('artRingLabel').textContent='Resta 3 secondi nell’anello · '+card.title;$('artRingProgress').value=Math.min(3,elapsed);
+ if(elapsed>=3)openArtCard(card);
+}
+
 let tabernacoloActor=null;
 function setupTabernacolo(model,config){
  const settings=config.tabernacolo,root=model.getObjectByName(settings.root),left=model.getObjectByName(settings.left),right=model.getObjectByName(settings.right);
@@ -260,7 +297,7 @@ function updateTabernacolo(dt){
  return old!==t.progress;
 }
 
-reset();let previous=performance.now(),lastFrame=0;renderer.setAnimationLoop(now=>{const dt=Math.min(.05,(now-previous)/1000);previous=now;if(running){const f=Number(keys.has('KeyW')||keys.has('ArrowUp'))-Number(keys.has('KeyS')||keys.has('ArrowDown'))+joy.y,r=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'))+joy.x;const k=(keys.has('ShiftLeft')||keys.has('ShiftRight')?3.5:1.8)*dt/Math.max(1,Math.hypot(f,r));move((Math.sin(yaw)*f+Math.cos(yaw)*r)*k,(Math.cos(yaw)*f-Math.sin(yaw)*r)*k);sync();updateRing(now)}const tabMoving=updateTabernacolo(dt);if((running||dirty||tabMoving)&&now-lastFrame>=33){renderer.render(scene,camera);dirty=false;lastFrame=now}});
-try{const results=await Promise.all([fetch('./galleria.glb',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('modello');return r.arrayBuffer()}).then(buffer=>new GLTFLoader().parseAsync(buffer,new URL('.',location.href).href)),fetch('./collisioni.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('collisioni');return r.json()}),fetch('./cronologia.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('cronologia');return r.json()}),fetch('./cronologia-foto.jpg',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('immagini');return r.blob()}),fetch('./opere.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('opere');return r.json()})]);boxes=results[1];document.documentElement.style.setProperty('--timeline-photos',`url("${URL.createObjectURL(results[3])}")`);buildTimeline(results[2]);results[0].scene.traverse(o=>{if(o.isMesh){const eventMatch=o.name.match(/^Cronologia_(?:Vita|Stile|Data)_(\d+)/);if(eventMatch){o.userData.timelineEvent=Number(eventMatch[1]);timelineMeshes.push(o)}limitProjectorsToExhibits(o);o.receiveShadow=true;o.castShadow=!o.name.includes('Ciuffi')&&!o.name.includes('Prato')&&!o.name.startsWith('Tabernacolo_Anta')}});scene.add(results[0].scene);setupTabernacolo(results[0].scene,results[4]);illuminateGallery(results[0].scene);renderer.shadowMap.needsUpdate=true;dirty=true;ready=true;enter.disabled=false;enter.textContent='Entra';status.textContent=touch?'Usa il joystick per camminare e trascina per guardarti intorno.':'Cammina con W A S D o le frecce. Muovi il mouse per guardarti intorno.';}catch(e){console.error(e);enter.textContent='Riprova';enter.disabled=false;enter.onclick=()=>location.reload();status.textContent='Caricamento non riuscito. Controlla la connessione e riprova.'}
+reset();let previous=performance.now(),lastFrame=0;renderer.setAnimationLoop(now=>{const dt=Math.min(.05,(now-previous)/1000);previous=now;if(running){const f=Number(keys.has('KeyW')||keys.has('ArrowUp'))-Number(keys.has('KeyS')||keys.has('ArrowDown'))+joy.y,r=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'))+joy.x;const k=(keys.has('ShiftLeft')||keys.has('ShiftRight')?3.5:1.8)*dt/Math.max(1,Math.hypot(f,r));move((Math.sin(yaw)*f+Math.cos(yaw)*r)*k,(Math.cos(yaw)*f-Math.sin(yaw)*r)*k);sync();updateRing(now);if(running)updateArtRings(now)}const tabMoving=updateTabernacolo(dt);if((running||dirty||tabMoving)&&now-lastFrame>=33){renderer.render(scene,camera);dirty=false;lastFrame=now}});
+try{const results=await Promise.all([fetch('./galleria.glb',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('modello');return r.arrayBuffer()}).then(buffer=>new GLTFLoader().parseAsync(buffer,new URL('.',location.href).href)),fetch('./collisioni.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('collisioni');return r.json()}),fetch('./cronologia.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('cronologia');return r.json()}),fetch('./cronologia-foto.jpg',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('immagini');return r.blob()}),fetch('./opere.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('opere');return r.json()}),fetch('./schede-opere.jpg',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('immagini opere');return r.blob()}).then(createImageBitmap)]);boxes=results[1];document.documentElement.style.setProperty('--timeline-photos',`url("${URL.createObjectURL(results[3])}")`);buildTimeline(results[2]);results[0].scene.traverse(o=>{if(o.isMesh){const eventMatch=o.name.match(/^Cronologia_(?:Vita|Stile|Data)_(\d+)/);if(eventMatch){o.userData.timelineEvent=Number(eventMatch[1]);timelineMeshes.push(o)}limitProjectorsToExhibits(o);o.receiveShadow=true;o.castShadow=!o.name.includes('Ciuffi')&&!o.name.includes('Prato')&&!o.name.startsWith('Tabernacolo_Anta')}});scene.add(results[0].scene);setupTabernacolo(results[0].scene,results[4]);setupArtCards(results[4],results[5]);results[5].close();illuminateGallery(results[0].scene);renderer.shadowMap.needsUpdate=true;dirty=true;ready=true;enter.disabled=false;enter.textContent='Entra';status.textContent=touch?'Usa il joystick per camminare e trascina per guardarti intorno.':'Cammina con W A S D o le frecce. Muovi il mouse per guardarti intorno.';}catch(e){console.error(e);enter.textContent='Riprova';enter.disabled=false;enter.onclick=()=>location.reload();status.textContent='Caricamento non riuscito. Controlla la connessione e riprova.'}
 </script>
 </body></html>

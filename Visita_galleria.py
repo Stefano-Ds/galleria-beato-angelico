@@ -86,6 +86,7 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
         self.boxes=build_obstacles(context);self.last=time.perf_counter()
         self.tabernacolo=bpy.data.objects.get('Tabernacolo_Root');self.tabernacolo_target=0.;self.tabernacolo_progress=0.
         if self.tabernacolo:self.tabernacolo['apertura']=0.
+        self.art_cards=json.loads(bpy.data.texts['Opere.json'].as_string()).get('schede',[]);self.art_open=None;self.art_started=None;self.art_current=None;self.art_blocked=None;self.art_texture=None;self.art_scroll=0
         self.chronology=timeline_data();self.timeline_open=False;self.timeline_offset=0.;self.timeline_drag=None;self.ring_entered=None;self.ring_armed=True;self.timeline_texture=None
         self.timeline_handler=bpy.types.SpaceView3D.draw_handler_add(self.draw_timeline,(),'WINDOW','POST_PIXEL')
         self.cx=self.region.x+self.region.width//2;self.cy=self.region.y+self.region.height//2
@@ -107,7 +108,30 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
     def close_timeline(self,context):
         self.timeline_open=False;self.timeline_drag=None;self.last=time.perf_counter();context.window.cursor_modal_set('NONE');context.window.cursor_warp(self.cx,self.cy)
         self.area.header_text_set('VISITA | WASD: cammina | Mouse: guarda | Resta 2 secondi nell’anello | Esc: termina');self.area.tag_redraw()
+    def open_art(self,card):
+        self.art_open=card;self.art_blocked=card['id'];self.art_started=None;self.keys.clear();self.art_scroll=0
+        bpy.context.window.cursor_modal_restore();self.area.header_text_set('OPERA | Rotella: scorri | Esc o ×: chiudi');self.area.tag_redraw()
+    def close_art(self,context):
+        self.art_open=None;self.art_started=None;self.art_current=None;self.last=time.perf_counter()
+        context.window.cursor_modal_set('NONE');context.window.cursor_warp(self.cx,self.cy);self.area.header_text_set('VISITA | Resta 3 secondi in un anello per leggere la scheda');self.area.tag_redraw()
+    def draw_art(self):
+        card=self.art_open;w=self.region.width;h=self.region.height
+        gpu.state.blend_set('ALPHA');draw_rect(0,0,w,h,(.91,.85,.79,1));draw_words(card['title'],24,h-48,23);draw_words(card['subtitle'],24,h-76,12);draw_words('×',w-45,h-45,26)
+        im=bpy.data.images.get('Schede opere')
+        if im and self.art_texture is None:self.art_texture=gpu.texture.from_image(im)
+        iw=min(w*.46,(h-155)*.8);ih=iw*1.25;x=24;y=h-115-ih;tile=card['tile'];u0=(tile%3)/3;v0=1-(tile//3+1)/2
+        if self.art_texture:
+            shader=gpu.shader.from_builtin('IMAGE');shader.bind();shader.uniform_sampler('image',self.art_texture)
+            batch_for_shader(shader,'TRI_FAN',{'pos':[(x,y),(x+iw,y),(x+iw,y+ih),(x,y+ih)],'texCoord':[(u0,v0),(u0+1/3,v0),(u0+1/3,v0+.5),(u0,v0+.5)]}).draw(shader)
+        tx=iw+50;line_width=max(15,int((w-tx-30)/8));lines=[]
+        for paragraph in card['paragraphs']:lines.extend(textwrap.wrap(paragraph,line_width)+[''])
+        self.art_scroll=max(0,min(self.art_scroll,max(0,len(lines)*22-(h-170))))
+        for i,line in enumerate(lines):
+            ly=h-120-i*22+self.art_scroll
+            if 55<ly<h-100:draw_words(line,tx,ly,15)
+        draw_words('Rotella per scorrere · Esc per chiudere',24,22,12);gpu.state.blend_set('NONE')
     def draw_timeline(self):
+        if self.art_open:self.draw_art();return
         if not self.timeline_open or not self.chronology:return
         region=next((r for r in self.area.regions if r.type=='WINDOW'),None)
         if not region:return
@@ -135,6 +159,11 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
         draw_words('←',25,22,27);draw_words('→',w-50,22,27);draw_words('Frecce / rotella / trascinamento · Esc per chiudere',80,27,12)
         gpu.state.blend_set('NONE')
     def modal(self,context,event):
+        if self.art_open and event.type!='WINDOW_DEACTIVATE':
+            if event.type in {'ESC','RIGHTMOUSE'} and event.value=='PRESS':self.close_art(context);return {'RUNNING_MODAL'}
+            if event.type=='LEFTMOUSE' and event.value=='PRESS' and event.mouse_region_x>self.region.width-70 and event.mouse_region_y>self.region.height-70:self.close_art(context)
+            if event.type in {'WHEELUPMOUSE','WHEELDOWNMOUSE'}:self.art_scroll+=-65 if event.type=='WHEELUPMOUSE' else 65
+            self.area.tag_redraw();return {'RUNNING_MODAL'}
         if self.timeline_open and event.type!='WINDOW_DEACTIVATE':
             if event.type in {'ESC','RIGHTMOUSE'} and event.value=='PRESS':self.close_timeline(context);return {'RUNNING_MODAL'}
             if event.type in {'LEFT_ARROW','RIGHT_ARROW','WHEELUPMOUSE','WHEELDOWNMOUSE'} and event.value=='PRESS':
@@ -183,6 +212,13 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
                 self.tabernacolo_progress=min(self.tabernacolo_target,old+step) if self.tabernacolo_target>old else max(self.tabernacolo_target,old-step)
                 if abs(old-self.tabernacolo_progress)>1e-6:
                     t=self.tabernacolo_progress;self.tabernacolo['apertura']=t*t*(3-2*t);self.tabernacolo.update_tag();context.view_layer.update();self.area.tag_redraw()
+            card=next((c for c in self.art_cards if math.hypot(self.pos.x-c['ring']['x'],self.pos.y-c['ring']['y'])<=c['ring']['radius']),None)
+            if self.art_blocked and not any(c['id']==self.art_blocked and math.hypot(self.pos.x-c['ring']['x'],self.pos.y-c['ring']['y'])<=c['ring']['radius'] for c in self.art_cards):self.art_blocked=None
+            if not card or card['id']==self.art_blocked:self.art_started=None;self.art_current=None
+            else:
+                if self.art_current!=card['id']:self.art_current=card['id'];self.art_started=now
+                self.area.header_text_set('OPERA | '+card['title']+' | '+str(min(3,int(now-self.art_started)))+'/3 secondi')
+                if now-self.art_started>=3:self.open_art(card);return {'RUNNING_MODAL'}
             if self.chronology:
                 ring=self.chronology['ring'];inside=math.hypot(self.pos.x-ring['x'],self.pos.y-ring['y'])<=ring['radius']
                 if not inside:self.ring_entered=None;self.ring_armed=True
