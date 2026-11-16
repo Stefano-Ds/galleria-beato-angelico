@@ -120,26 +120,31 @@ OTHER DEALINGS IN THE FONT SOFTWARE.
 @media(max-width:700px){#artDialog header{padding:20px}.art-layout{display:block;padding:20px;height:calc(100% - 125px)}.art-picture{height:45dvh;margin-bottom:22px}#artImage{max-height:45dvh}.art-copy{overflow:visible;padding:0}.art-copy p{font-size:17px}}
 
 #artDialog[open]{display:flex;flex-direction:column;overflow:hidden}#artDialog header{flex:none}.art-layout{flex:1;min-height:0;height:auto}
-</style></head>
+</style><style>
+.art-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;align-content:center;min-height:0}.art-gallery figure{margin:0;min-width:0;text-align:center}.art-gallery img{width:100%;max-height:calc(100dvh - 220px);object-fit:contain}.art-gallery figcaption{font:14px/1.4 Georgia,serif;padding:10px 0;color:#633d29}
+#artDialog.comparison .art-layout{display:block}#artDialog.comparison .art-gallery{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-bottom:28px}#artDialog.comparison .art-gallery img{height:36dvh;max-height:400px}.comparison-sections{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;margin-top:30px}.comparison-sections h3{font:23px/1.3 Georgia,serif;border-top:1px solid #976c4e50;padding-top:18px}.comparison-sections p{font-size:17px}.art-copy{overflow:auto}
+@media(max-width:900px){.comparison-sections{display:block}#artDialog.comparison .art-gallery{gap:12px}#artDialog.comparison .art-gallery img{height:25dvh}}
+@media(max-width:700px){.art-gallery{margin-bottom:22px}.art-gallery img{max-height:45dvh}#artDialog.comparison .art-gallery{grid-template-columns:1fr}#artDialog.comparison .art-gallery img{height:42dvh}.art-copy{overflow:visible}}
+</style><style>#artDialog.comparison #artCopy>p{max-width:95ch;margin-left:auto;margin-right:auto}</style></head>
 <body>
 <div id="cover"><div id="card"><h1>Galleria Beato Angelico</h1><button id="enter" disabled>Caricamento…</button><p id="status" role="status">Preparazione della visita</p></div></div>
 <div id="tools"><button id="reset" aria-label="Torna all'ingresso" title="Torna all’ingresso">↺</button><button id="full" aria-label="Schermo intero" title="Schermo intero">⛶</button><button id="pause" aria-label="Pausa" title="Pausa">Ⅱ</button></div>
-<div id="hint">W A S D / frecce · Mouse per guardare · Esc per pausa</div><div id="dot"></div><div id="pad" aria-label="Comando movimento"><div id="stick"></div></div>
+<div id="hint">W A S D / frecce - Mouse per guardare - Esc per pausa</div><div id="dot"></div><div id="pad" aria-label="Comando movimento"><div id="stick"></div></div>
 
 <div id="ringPrompt" hidden><span>Resta nell’anello per aprire la linea del tempo</span><progress id="ringProgress" max="2" value="0" aria-label="Attesa apertura linea del tempo"></progress></div>
 <dialog id="timelineDialog" aria-labelledby="timelineTitle">
 <header class="tl-header"><div><h2 id="timelineTitle">Beato Angelico</h2></div><button class="tl-close" id="timelineClose" aria-label="Chiudi la linea del tempo">×</button></header>
 <div id="timelineViewport" tabindex="0" aria-label="Linea del tempo scorrevole, usa le frecce destra e sinistra"><div id="timelineTrack"></div></div>
-<footer class="tl-footer"><p>Scorri, trascina o usa ← → · Esc per chiudere</p><nav aria-label="Scorri la linea del tempo"><button id="timelinePrevious" aria-label="Scorri a sinistra">←</button><button id="timelineNext" aria-label="Scorri a destra">→</button></nav></footer>
+<footer class="tl-footer"><p>Scorri, trascina o usa ← → - Esc per chiudere</p><nav aria-label="Scorri la linea del tempo"><button id="timelinePrevious" aria-label="Scorri a sinistra">←</button><button id="timelineNext" aria-label="Scorri a destra">→</button></nav></footer>
 </dialog>
 <div id="artRingPrompt" hidden><span id="artRingLabel"></span><progress id="artRingProgress" max="3" value="0" aria-label="Attesa apertura scheda opera"></progress></div>
-<dialog id="artDialog" aria-labelledby="artTitle"><header><div><h2 id="artTitle"></h2><p id="artSubtitle"></p></div><button class="tl-close" id="artClose" aria-label="Chiudi la scheda dell’opera">×</button></header><div class="art-layout"><figure class="art-picture"><img id="artImage" alt=""></figure><article class="art-copy" id="artCopy"></article></div></dialog>
+<dialog id="artDialog" aria-labelledby="artTitle"><header><div><h2 id="artTitle"></h2><p id="artSubtitle"></p></div><button class="tl-close" id="artClose" aria-label="Chiudi la scheda dell’opera">×</button></header><div class="art-layout"><div class="art-gallery" id="artGallery"></div><article class="art-copy" id="artCopy"></article></div></dialog>
 <script type="module">
 import * as THREE from 'three';
 import {GLTFLoader} from './GLTFLoader.js';
 if(location.search){history.replaceState(null,'',location.pathname+location.hash)}
 const $=id=>document.getElementById(id),status=$('status'),enter=$('enter');
-const touch=matchMedia('(pointer:coarse)').matches;if(touch){document.body.classList.add('touch');$('hint').textContent='Joystick per camminare · Trascina per guardare'}
+const touch=matchMedia('(pointer:coarse)').matches;if(touch){document.body.classList.add('touch');$('hint').textContent='Joystick per camminare - Trascina per guardare'}
 let renderer;
 try{renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});}catch(e){status.textContent='Il browser non supporta la grafica 3D. Prova Chrome, Edge o Safari aggiornato.';throw e}
 renderer.setPixelRatio(Math.min(devicePixelRatio,touch?1:1.5));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.10;document.body.prepend(renderer.domElement);
@@ -210,19 +215,24 @@ function limitProjectorsToExhibits(mesh){
  mesh.material=Array.isArray(mesh.material)?mesh.material.map(restrict):restrict(mesh.material);
 }
 let dirty=true;
-const pos={x:0,y:-13.0};let yaw=0,pitch=-.10,running=false,ready=false,boxes=[];
+const pos={x:0,y:-13.0};let yaw=0,pitch=-.10,running=false,ready=false,boxes=[];let normalBoxes=[],meadowConfig=null,meadowUnlocked=false;
 const keys=new Set(),joy={x:0,y:0};
-function reset(){pos.x=0;pos.y=-13.0;yaw=0;pitch=-.10;sync()}
+function reset(){meadowUnlocked=false;boxes=normalBoxes;pos.x=0;pos.y=-13.0;yaw=0;pitch=-.10;sync()}
 function sync(){camera.position.set(pos.x,1.7,-pos.y);camera.rotation.set(pitch,-yaw,0);renderer.domElement.dataset.visitorPosition=JSON.stringify([pos.x,pos.y,1.7]);dirty=true}
 const radius=.28;
-function valid(x,y){for(let i=0;i<16;i++){const t=Math.PI*2*i/16,px=x+radius*Math.cos(t),py=y+radius*Math.sin(t);if(!((px>=-5&&px<=5&&py>=0&&py<=18)||(px>=-3.5&&px<=3.5&&py>=18&&py<=24)||(px>=-4&&px<=4&&py>=-8&&py<=0)||(px>=-4&&px<=4&&py>=-14&&py<=-8)))return false}for(const [x0,x1,y0,y1]of boxes){const nx=Math.max(x0,Math.min(x,x1)),ny=Math.max(y0,Math.min(y,y1));if((x-nx)**2+(y-ny)**2<radius**2)return false}return true}
+function valid(x,y){for(let i=0;i<16;i++){const t=Math.PI*2*i/16,px=x+radius*Math.cos(t),py=y+radius*Math.sin(t);if(!((px>=-5&&px<=5&&py>=0&&py<=18)||(px>=-3.5&&px<=3.5&&py>=18&&py<=24)||(px>=-4&&px<=4&&py>=-8&&py<=0)||(px>=-4&&px<=4&&py>=-14&&py<=-8)||(meadowUnlocked&&px>=meadowConfig.bounds[0]&&px<=meadowConfig.bounds[1]&&py>=meadowConfig.bounds[2]&&py<=meadowConfig.bounds[3])))return false}for(const [x0,x1,y0,y1]of boxes){const nx=Math.max(x0,Math.min(x,x1)),ny=Math.max(y0,Math.min(y,y1));if((x-nx)**2+(y-ny)**2<radius**2)return false}return true}
 function move(dx,dy){const n=Math.max(1,Math.ceil(Math.hypot(dx,dy)/.055));for(let i=0;i<n;i++){if(valid(pos.x+dx/n,pos.y))pos.x+=dx/n;if(valid(pos.x,pos.y+dy/n))pos.y+=dy/n}}
 function look(dx,dy){yaw+=dx*.0025;pitch=Math.max(-1.3,Math.min(1.3,pitch-dy*.0025));sync()}
 function stop(){clearArtDwell();running=false;keys.clear();joy.x=joy.y=0;document.body.classList.remove('running');enter.textContent='Riprendi';if(document.pointerLockElement)document.exitPointerLock()}
 async function start(){if(!ready)return;running=true;document.body.classList.add('running');if(!touch){try{await renderer.domElement.requestPointerLock()}catch(e){/* Drag-to-look remains available when pointer lock is unavailable. */}}}
 enter.onclick=start;$('pause').onclick=stop;$('reset').onclick=reset;
 $('full').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch(e){}};
-addEventListener('keydown',e=>{if(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();if(running)keys.add(e.code)}if(e.code==='Escape'&&running)stop()});
+function tryMeadowExit(){
+ if(!running||!meadowConfig||meadowUnlocked)return;
+ const [x0,x1,y0,y1]=meadowConfig.trigger;if(pos.x<x0||pos.x>x1||pos.y<y0||pos.y>y1)return;
+ meadowUnlocked=true;boxes=normalBoxes.filter(box=>!meadowConfig.fenceBoxes.some(fence=>fence.every((v,i)=>Math.abs(v-box[i])<.0001)));
+}
+addEventListener('keydown',e=>{if(e.code==='Space'&&running){e.preventDefault();if(!e.repeat)tryMeadowExit()}if(['KeyW','KeyA','KeyS','KeyD','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','ShiftLeft','ShiftRight'].includes(e.code)){e.preventDefault();if(running)keys.add(e.code)}if(e.code==='Escape'&&running)stop()});
 addEventListener('keyup',e=>keys.delete(e.code));addEventListener('blur',()=>{if(running)stop()});document.addEventListener('visibilitychange',()=>{if(document.hidden&&running)stop()});
 document.addEventListener('pointerlockchange',()=>{if(!document.pointerLockElement&&running&&!drag)stop()});
 let drag=null;
@@ -237,7 +247,7 @@ addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updat
 let chronology=null,ringStarted=null,ringArmed=true;const timelineMeshes=[],raycaster=new THREE.Raycaster();
 const timelineDialog=$('timelineDialog'),timelineViewport=$('timelineViewport');
 function element(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text)el.textContent=text;return el}
-function timelineCard(event,band){const info=event[band];if(!info)return element('div','tl-empty');const card=element('article','tl-card '+band),photo=element('a','tl-photo');photo.href=event.photo.page;photo.target='_blank';photo.rel='noopener';photo.setAttribute('role','img');photo.setAttribute('aria-label',event.caption);photo.title=event.caption+' · '+event.photo.author+' · '+event.photo.license+' · '+event.photo.page;photo.style.backgroundPosition=`${event.atlas.column*100/3}% ${event.atlas.row*100/3}%`;card.append(photo,element('h3','',info.title),element('p','',info.text));return card}
+function timelineCard(event,band){const info=event[band];if(!info)return element('div','tl-empty');const card=element('article','tl-card '+band),photo=element('a','tl-photo');photo.href=event.photo.page;photo.target='_blank';photo.rel='noopener';photo.setAttribute('role','img');photo.setAttribute('aria-label',event.caption);photo.title=event.caption+' - '+event.photo.author+' - '+event.photo.license+' - '+event.photo.page;photo.style.backgroundPosition=`${event.atlas.column*100/3}% ${event.atlas.row*100/3}%`;card.append(photo,element('h3','',info.title),element('p','',info.text));return card}
 function buildTimeline(data){chronology=data;$('timelineTrack').replaceChildren();for(const event of data.events){const column=element('section','tl-column');column.setAttribute('aria-label',event.date);column.dataset.eventId=event.id;const date=element('div','tl-date');date.append(element('span','',event.date));column.append(timelineCard(event,'life'),date,timelineCard(event,'style'));$('timelineTrack').append(column);}}
 function openTimeline(index=0){if(!chronology||timelineDialog.open)return;ringArmed=false;ringStarted=null;$('ringPrompt').hidden=true;stop();document.body.classList.add('timeline-open');timelineDialog.showModal();timelineViewport.scrollLeft=Math.max(0,index*300);$('timelineClose').focus()}
 function closeTimeline(){timelineDialog.close();document.body.classList.remove('timeline-open');ringStarted=null;enter.textContent='Riprendi';enter.focus()}
@@ -254,19 +264,19 @@ renderer.domElement.addEventListener('click',e=>{if(!running||!chronology)return
 let artCards=[],artStarted=null,artCurrent=null,artBlocked=null;
 const artDialog=$('artDialog'),artPrompt=$('artRingPrompt');
 function setupArtCards(config,atlas){
- artCards=(config.schede||[]).map(card=>{
-  const canvas=document.createElement('canvas');canvas.width=config.schedeAtlas.cellWidth;canvas.height=config.schedeAtlas.cellHeight;
-  canvas.getContext('2d').drawImage(atlas,(card.tile%3)*canvas.width,Math.floor(card.tile/3)*canvas.height,canvas.width,canvas.height,0,0,canvas.width,canvas.height);
-  return {...card,photo:canvas.toDataURL('image/jpeg',.92)};
- });
+ const crop=item=>{const canvas=document.createElement('canvas'),r=item.crop||{x:0,y:0,width:config.schedeAtlas.cellWidth,height:config.schedeAtlas.cellHeight};canvas.width=r.width;canvas.height=r.height;canvas.getContext('2d').drawImage(atlas,(item.tile%config.schedeAtlas.columns)*config.schedeAtlas.cellWidth+r.x,Math.floor(item.tile/config.schedeAtlas.columns)*config.schedeAtlas.cellHeight+r.y,r.width,r.height,0,0,r.width,r.height);return {...item,photo:canvas.toDataURL('image/jpeg',.92)}};
+ artCards=(config.schede||[]).map(card=>({...card,gallery:card.gallery.map(crop)}));
+ meadowConfig=config.easterEgg;
 }
 function clearArtDwell(){artStarted=null;artCurrent=null;if(artPrompt)artPrompt.hidden=true}
 function openArtCard(card){
  if(artDialog.open||timelineDialog.open)return;
  artBlocked=card.id;stop();$('artTitle').textContent=card.title;$('artSubtitle').textContent=card.subtitle;$('artSubtitle').hidden=!card.subtitle;
- $('artCopy').replaceChildren(...card.paragraphs.map(text=>element('p','',text)));
- $('artImage').src=card.photo;$('artImage').alt=card.title;$('artImage').title=[card.imageCredit.author,card.imageCredit.license].filter(Boolean).join(' · ');
- document.body.classList.add('art-open');artDialog.showModal();$('artClose').focus();$('artCopy').scrollTop=0;artDialog.querySelector('.art-layout').scrollTop=0;
+ artDialog.classList.toggle('comparison',card.kind==='comparison');
+ $('artGallery').replaceChildren(...card.gallery.map(item=>{const figure=element('figure',''),img=element('img','');img.src=item.photo;img.alt=item.caption;img.title=[item.imageCredit.author,item.imageCredit.license,item.imageCredit.page].filter(Boolean).join(' - ');figure.append(img,element('figcaption','',item.caption));return figure}));
+ const content=card.paragraphs.map(text=>element('p','',text));
+ if(card.sections){const sections=element('div','comparison-sections');for(const section of card.sections){const article=element('section','');article.append(element('h3','',section.heading),...section.paragraphs.map(text=>element('p','',text)));sections.append(article)}content.push(sections)}
+ $('artCopy').replaceChildren(...content);document.body.classList.add('art-open');artDialog.showModal();$('artClose').focus();$('artCopy').scrollTop=0;artDialog.querySelector('.art-layout').scrollTop=0;
 }
 function closeArtCard(){artDialog.close();document.body.classList.remove('art-open');clearArtDwell();enter.textContent='Riprendi';enter.focus()}
 $('artClose').onclick=closeArtCard;artDialog.addEventListener('cancel',e=>{e.preventDefault();closeArtCard()});
@@ -275,7 +285,7 @@ function updateArtRings(now){
  if(artBlocked&&!artCards.some(c=>c.id===artBlocked&&Math.hypot(pos.x-c.ring.x,pos.y-c.ring.y)<=c.ring.radius))artBlocked=null;
  if(!card||artBlocked===card.id||artDialog.open||timelineDialog.open){clearArtDwell();return}
  if(artCurrent!==card.id){artCurrent=card.id;artStarted=now}
- const elapsed=(now-artStarted)/1000;artPrompt.hidden=false;$('artRingLabel').textContent='Resta 3 secondi nell’anello · '+card.title;$('artRingProgress').value=Math.min(3,elapsed);
+ const elapsed=(now-artStarted)/1000;artPrompt.hidden=false;$('artRingLabel').textContent='Resta 3 secondi nell’anello - '+card.title;$('artRingProgress').value=Math.min(3,elapsed);
  if(elapsed>=3)openArtCard(card);
 }
 
@@ -298,6 +308,6 @@ function updateTabernacolo(dt){
 }
 
 reset();let previous=performance.now(),lastFrame=0;renderer.setAnimationLoop(now=>{const dt=Math.min(.05,(now-previous)/1000);previous=now;if(running){const f=Number(keys.has('KeyW')||keys.has('ArrowUp'))-Number(keys.has('KeyS')||keys.has('ArrowDown'))+joy.y,r=Number(keys.has('KeyD')||keys.has('ArrowRight'))-Number(keys.has('KeyA')||keys.has('ArrowLeft'))+joy.x;const k=(keys.has('ShiftLeft')||keys.has('ShiftRight')?3.5:1.8)*dt/Math.max(1,Math.hypot(f,r));move((Math.sin(yaw)*f+Math.cos(yaw)*r)*k,(Math.cos(yaw)*f-Math.sin(yaw)*r)*k);sync();updateRing(now);if(running)updateArtRings(now)}const tabMoving=updateTabernacolo(dt);if((running||dirty||tabMoving)&&now-lastFrame>=33){renderer.render(scene,camera);dirty=false;lastFrame=now}});
-try{const results=await Promise.all([fetch('./galleria.glb',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('modello');return r.arrayBuffer()}).then(buffer=>new GLTFLoader().parseAsync(buffer,new URL('.',location.href).href)),fetch('./collisioni.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('collisioni');return r.json()}),fetch('./cronologia.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('cronologia');return r.json()}),fetch('./cronologia-foto.jpg',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('immagini');return r.blob()}),fetch('./opere.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('opere');return r.json()}),fetch('./schede-opere.jpg',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('immagini opere');return r.blob()}).then(createImageBitmap)]);boxes=results[1];document.documentElement.style.setProperty('--timeline-photos',`url("${URL.createObjectURL(results[3])}")`);buildTimeline(results[2]);results[0].scene.traverse(o=>{if(o.isMesh){const eventMatch=o.name.match(/^Cronologia_(?:Vita|Stile|Data)_(\d+)/);if(eventMatch){o.userData.timelineEvent=Number(eventMatch[1]);timelineMeshes.push(o)}limitProjectorsToExhibits(o);o.receiveShadow=true;o.castShadow=!o.name.includes('Ciuffi')&&!o.name.includes('Prato')&&!o.name.startsWith('Tabernacolo_Anta')}});scene.add(results[0].scene);setupTabernacolo(results[0].scene,results[4]);setupArtCards(results[4],results[5]);results[5].close();illuminateGallery(results[0].scene);renderer.shadowMap.needsUpdate=true;dirty=true;ready=true;enter.disabled=false;enter.textContent='Entra';status.textContent=touch?'Usa il joystick per camminare e trascina per guardarti intorno.':'Cammina con W A S D o le frecce. Muovi il mouse per guardarti intorno.';}catch(e){console.error(e);enter.textContent='Riprova';enter.disabled=false;enter.onclick=()=>location.reload();status.textContent='Caricamento non riuscito. Controlla la connessione e riprova.'}
+try{const results=await Promise.all([fetch('./galleria.glb',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('modello');return r.arrayBuffer()}).then(buffer=>new GLTFLoader().parseAsync(buffer,new URL('.',location.href).href)),fetch('./collisioni.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('collisioni');return r.json()}),fetch('./cronologia.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('cronologia');return r.json()}),fetch('./cronologia-foto.jpg',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('immagini');return r.blob()}),fetch('./opere.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('opere');return r.json()}),fetch('./schede-opere.jpg',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('immagini opere');return r.blob()}).then(createImageBitmap)]);boxes=results[1];normalBoxes=boxes;document.documentElement.style.setProperty('--timeline-photos',`url("${URL.createObjectURL(results[3])}")`);buildTimeline(results[2]);results[0].scene.traverse(o=>{if(o.isMesh){const eventMatch=o.name.match(/^Cronologia_(?:Vita|Stile|Data)_(\d+)/);if(eventMatch){o.userData.timelineEvent=Number(eventMatch[1]);timelineMeshes.push(o)}limitProjectorsToExhibits(o);o.receiveShadow=true;o.castShadow=!o.name.includes('Ciuffi')&&!o.name.includes('Prato')&&!o.name.startsWith('Tabernacolo_Anta')}});scene.add(results[0].scene);setupTabernacolo(results[0].scene,results[4]);setupArtCards(results[4],results[5]);results[5].close();illuminateGallery(results[0].scene);renderer.shadowMap.needsUpdate=true;dirty=true;ready=true;enter.disabled=false;enter.textContent='Entra';status.textContent=touch?'Usa il joystick per camminare e trascina per guardarti intorno.':'Cammina con W A S D o le frecce. Muovi il mouse per guardarti intorno.';}catch(e){console.error(e);enter.textContent='Riprova';enter.disabled=false;enter.onclick=()=>location.reload();status.textContent='Caricamento non riuscito. Controlla la connessione e riprova.'}
 </script>
 </body></html>

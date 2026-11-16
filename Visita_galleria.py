@@ -3,6 +3,8 @@ import bpy, math, time, os, json, textwrap
 import gpu, blf
 from gpu_extras.batch import batch_for_shader
 from mathutils import Vector
+MEADOW_UNLOCKED=False
+MEADOW_CONFIG=json.loads(bpy.data.texts['Opere.json'].as_string()).get('easterEgg',{})
 RADIUS=.28
 EYE=1.70
 
@@ -23,7 +25,7 @@ def valid(x,y,boxes):
     # The walkable space is the museum plus its neutral entrance apron.
     for i in range(16):
         t=math.tau*i/16;px=x+RADIUS*math.cos(t);py=y+RADIUS*math.sin(t)
-        if not ((-5<=px<=5 and 0<=py<=18) or (-3.5<=px<=3.5 and 18<=py<=24) or (-4<=px<=4 and -8<=py<=0) or (-4<=px<=4 and -14<=py<=-8)):
+        if not ((-5<=px<=5 and 0<=py<=18) or (-3.5<=px<=3.5 and 18<=py<=24) or (-4<=px<=4 and -8<=py<=0) or (-4<=px<=4 and -14<=py<=-8) or (MEADOW_UNLOCKED and MEADOW_CONFIG['bounds'][0]<=px<=MEADOW_CONFIG['bounds'][1] and MEADOW_CONFIG['bounds'][2]<=py<=MEADOW_CONFIG['bounds'][3])):
             return False
     for x0,x1,y0,y1 in boxes:
         nx=max(x0,min(x,x1));ny=max(y0,min(y,y1))
@@ -80,6 +82,8 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
     bl_label='Entra nella galleria'
     bl_description='Visita da fuori, con collisioni su muri e arredi. WASD e mouse; Esc per terminare'
     def invoke(self,context,event):
+        global MEADOW_UNLOCKED
+        MEADOW_UNLOCKED=False
         if context.area.type!='VIEW_3D':return {'CANCELLED'}
         self.area=context.area;self.region=context.region;self.rv=context.space_data.region_3d
         self.pos=Vector((0,-13.0,EYE));self.yaw=0.;self.pitch=-.10;self.keys=set()
@@ -115,21 +119,27 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
         self.art_open=None;self.art_started=None;self.art_current=None;self.last=time.perf_counter()
         context.window.cursor_modal_set('NONE');context.window.cursor_warp(self.cx,self.cy);self.area.header_text_set('VISITA | Resta 3 secondi in un anello per leggere la scheda');self.area.tag_redraw()
     def draw_art(self):
-        card=self.art_open;w=self.region.width;h=self.region.height
+        card=self.art_open;w=self.region.width;h=self.region.height;comparison=card.get('kind')=='comparison'
         gpu.state.blend_set('ALPHA');draw_rect(0,0,w,h,(.91,.85,.79,1));draw_words(card['title'],24,h-48,23);draw_words(card['subtitle'],24,h-76,12);draw_words('×',w-45,h-45,26)
         im=bpy.data.images.get('Schede opere')
         if im and self.art_texture is None:self.art_texture=gpu.texture.from_image(im)
-        iw=min(w*.46,(h-155)*.8);ih=iw*1.25;x=24;y=h-115-ih;tile=card['tile'];u0=(tile%3)/3;v0=1-(tile//3+1)/2
-        if self.art_texture:
-            shader=gpu.shader.from_builtin('IMAGE');shader.bind();shader.uniform_sampler('image',self.art_texture)
-            batch_for_shader(shader,'TRI_FAN',{'pos':[(x,y),(x+iw,y),(x+iw,y+ih),(x,y+ih)],'texCoord':[(u0,v0),(u0+1/3,v0),(u0+1/3,v0+.5),(u0,v0+.5)]}).draw(shader)
-        tx=iw+50;line_width=max(15,int((w-tx-30)/8));lines=[]
+        gallery=card['gallery'];total=w-48 if comparison else w*.48;iw=min(total/len(gallery)-12,(h*.34 if comparison else h-180)*.8);ih=iw*1.25
+        for j,item in enumerate(gallery):
+            x=24+j*(total/len(gallery))+(total/len(gallery)-iw)/2;y=h-110-ih;tile=item['tile'];u0=(tile%3)/3;v0=1-(tile//3+1)/3
+            if self.art_texture:
+                shader=gpu.shader.from_builtin('IMAGE');shader.bind();shader.uniform_sampler('image',self.art_texture)
+                batch_for_shader(shader,'TRI_FAN',{'pos':[(x,y),(x+iw,y),(x+iw,y+ih),(x,y+ih)],'texCoord':[(u0,v0),(u0+1/3,v0),(u0+1/3,v0+1/3),(u0,v0+1/3)]}).draw(shader)
+            draw_words(item['caption'],x,y-22,12)
+        tx=24 if comparison else total+48;top=h-160-ih if comparison else h-120;line_width=max(15,int((w-tx-30)/8));lines=[]
         for paragraph in card['paragraphs']:lines.extend(textwrap.wrap(paragraph,line_width)+[''])
-        self.art_scroll=max(0,min(self.art_scroll,max(0,len(lines)*22-(h-170))))
+        for section in card.get('sections',[]):
+            lines.extend(textwrap.wrap(section['heading'],line_width)+[''])
+            for paragraph in section['paragraphs']:lines.extend(textwrap.wrap(paragraph,line_width)+[''])
+        self.art_scroll=max(0,min(self.art_scroll,max(0,len(lines)*22-(top-65))))
         for i,line in enumerate(lines):
-            ly=h-120-i*22+self.art_scroll
-            if 55<ly<h-100:draw_words(line,tx,ly,15)
-        draw_words('Rotella per scorrere · Esc per chiudere',24,22,12);gpu.state.blend_set('NONE')
+            ly=top-i*22+self.art_scroll
+            if 55<ly<=top:draw_words(line,tx,ly,15)
+        draw_words('Rotella per scorrere - Esc per chiudere',24,22,12);gpu.state.blend_set('NONE')
     def draw_timeline(self):
         if self.art_open:self.draw_art();return
         if not self.timeline_open or not self.chronology:return
@@ -156,9 +166,10 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
             date_lines=textwrap.wrap(event['date'],width=23)
             for j,line in enumerate(date_lines):
                 blf.size(0,12);tw=blf.dimensions(0,line)[0];draw_words(line,x+(size-tw)/2,mid+10+(len(date_lines)-1-j)*15,12)
-        draw_words('←',25,22,27);draw_words('→',w-50,22,27);draw_words('Frecce / rotella / trascinamento · Esc per chiudere',80,27,12)
+        draw_words('←',25,22,27);draw_words('→',w-50,22,27);draw_words('Frecce / rotella / trascinamento - Esc per chiudere',80,27,12)
         gpu.state.blend_set('NONE')
     def modal(self,context,event):
+        global MEADOW_UNLOCKED
         if self.art_open and event.type!='WINDOW_DEACTIVATE':
             if event.type in {'ESC','RIGHTMOUSE'} and event.value=='PRESS':self.close_art(context);return {'RUNNING_MODAL'}
             if event.type=='LEFTMOUSE' and event.value=='PRESS' and event.mouse_region_x>self.region.width-70 and event.mouse_region_y>self.region.height-70:self.close_art(context)
@@ -183,6 +194,11 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
             context.space_data.show_region_toolbar=self.previous_toolbar;context.space_data.show_region_ui=self.previous_sidebar
             if self.timeline_handler:bpy.types.SpaceView3D.draw_handler_remove(self.timeline_handler,'WINDOW');self.timeline_handler=None
             return {'FINISHED'}
+        if event.type=='SPACE' and event.value=='PRESS' and not MEADOW_UNLOCKED:
+            x0,x1,y0,y1=MEADOW_CONFIG['trigger']
+            if x0<=self.pos.x<=x1 and y0<=self.pos.y<=y1:
+                MEADOW_UNLOCKED=True
+                self.boxes=[box for box in self.boxes if not any(all(abs(v-box[i])<.0001 for i,v in enumerate(fence)) for fence in MEADOW_CONFIG['fenceBoxes'])]
         if event.type in {'W','A','S','D','LEFT_SHIFT','RIGHT_SHIFT'}:
             if event.value=='PRESS':self.keys.add(event.type)
             elif event.value=='RELEASE':self.keys.discard(event.type)
