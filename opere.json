@@ -12,8 +12,8 @@
     },
     {
       "object": "Opera_03_SEGNAPOSTO",
-      "title": "Incoronazione della Vergine - Uffizi",
-      "image": "incoronazione"
+      "title": "Incoronazione della Vergine - Louvre",
+      "image": "incoronazione_louvre"
     },
     {
       "object": "Opera_04_SEGNAPOSTO",
@@ -39,8 +39,8 @@
     },
     {
       "object": "Confronto_03_SEGNAPOSTO",
-      "title": "Annunciazione - San Giovanni Valdarno",
-      "image": "ann_valdarno"
+      "title": "Annunciazione - Cortona",
+      "image": "ann_cortona"
     }
   ],
   "tabernacolo": {
@@ -124,6 +124,22 @@
       "license": "Public domain",
       "licenseUrl": "",
       "modification": "Ridimensionata e impaginata senza ritagli dell’opera."
+    },
+    "incoronazione_louvre": {
+      "page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_-_Coronation_of_the_Virgin_-_WGA0627.jpg",
+      "title": "File:Fra Angelico - Coronation of the Virgin - WGA0627.jpg",
+      "url": "https://www.wga.hu/art/a/angelico/12/20louvre.jpg",
+      "author": "Fra Angelico",
+      "license": "Public domain",
+      "licenseUrl": ""
+    },
+    "ann_cortona": {
+      "page": "https://commons.wikimedia.org/wiki/File:Angelico_Annunciation_(Cortona).jpg",
+      "title": "File:Angelico Annunciation (Cortona).jpg",
+      "url": "https://www.wga.hu/art/a/angelico/04/1annunc.jpg",
+      "author": "Fra Angelico",
+      "license": "Public domain",
+      "licenseUrl": ""
     }
   },
   "schede": [
@@ -131,7 +147,7 @@
       "id": "giudizio",
       "object": "Opera_01_SEGNAPOSTO",
       "title": "Giudizio Universale",
-      "subtitle": "1425-1428 circa - Museo di San Marco, Firenze",
+      "subtitle": "1432-1435 circa - Tempera su tavola - Museo di San Marco, Firenze",
       "image": "giudizio",
       "ring": {
         "x": -2.95,
@@ -140,13 +156,16 @@
         "seconds": 3
       },
       "sources": [
-        "https://museitoscana.cultura.gov.it/news/il-giudizio-universale-del-beato-angelico-torna-al-museo-di-san-marco-dopo-la-mostra-dossier-ai-musei-reali-di-torino-dedicata-al-confronto-con-il-giudizio-universale-di-bartholomeus-spranger/"
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit",
+        "https://docs.google.com/document/d/142anmH7OApcByKWkyXGSSVulmRKppCD1R-TGTI2ugeE/edit"
       ],
       "paragraphs": [
-        "Il Giudizio Universale è una tavola dipinta a tempera e oro, datata dal museo tra il 1425 e il 1428. La particolare sagoma superiore, divisa in tre lobi, rende l’opera subito riconoscibile. La sua funzione originaria è ancora discussa; le fonti antiche la collegano alla chiesa fiorentina di Santa Maria degli Angeli.",
-        "In alto Cristo giudice è circondato da angeli, dalla Vergine, da san Giovanni Battista e da santi e profeti. La disposizione ordinata trasforma il cielo in una grande assemblea, davanti alla quale si compie il destino dell’umanità.",
-        "In basso, una doppia fila di tombe aperte divide i salvati dai dannati e conduce lo sguardo verso l’orizzonte. A sinistra, angeli e beati danzano nel giardino del Paradiso; a destra, i demoni trascinano i condannati verso l’Inferno.",
-        "Il contrasto tra l’armonia dei salvati e il disordine dei dannati rende immediato il significato morale della scena. Alla visione religiosa si unisce la ricerca rinascimentale dello spazio, evidente soprattutto nella prospettiva dei sepolcri."
+        "Il Giudizio Universale fu dipinto da Beato Angelico e dalla sua bottega per Santa Maria degli Angeli a Firenze, su commissione di Ambrogio Traversari. I materiali di studio lo datano al 1432-1435 e ne collegano la particolare forma trilobata alla decorazione della spalliera di un seggio sacerdotale. Nell’Ottocento l’opera venne trasferita nel complesso di San Marco.",
+        "In alto, Cristo giudice appare entro una mandorla di luce, circondato da angeli, dalla Vergine, da san Giovanni e da una doppia tribuna di santi, apostoli e personaggi dell’Antico Testamento. Sotto di lui compaiono un angelo con la croce e gli angeli che suonano le trombe dell’Apocalisse: i morti si sono risvegliati e hanno lasciato aperti i sepolcri.",
+        "La fila di tombe al centro separa i salvati dai dannati e costruisce una profondità prospettica che conduce verso l’orizzonte azzurro. Nel documento il numero dei dieci sepolcri è collegato alla perfezione pitagorica. La luce chiara e diffusa assume un significato spirituale: il lumen divino si manifesta nell’ordine geometrico della creazione.",
+        "A sinistra, il Paradiso è un giardino descritto nei particolari. Angeli e beati si prendono per mano e danzano in un girotondo sereno; sullo sfondo una porta luminosa accoglie i salvati. Il testo accosta questa armonia alle idee classiche sull’immortalità dell’anima e sulla musica delle sfere, legate a Platone e Pitagora.",
+        "A destra, i demoni trascinano i dannati nell’Inferno. I gironi corrispondono ai sette vizi capitali e le pene seguono la logica del contrappasso; nella parte inferiore Satana domina la scena. Il disordine e la violenza di questo lato si oppongono alla pace del Paradiso.",
+        "Fra salvati e dannati compaiono persone di ogni ceto: sovrani, religiosi, aristocratici e popolani. L’uguaglianza davanti al giudizio divino rende la pala un’immagine morale, oltre che una dimostrazione della capacità dell’artista di unire racconto religioso, simboli e spazio rinascimentale."
       ],
       "tile": 0,
       "imageCredit": {
@@ -200,7 +219,8 @@
         "Il confronto fra stato chiuso e aperto aiuta a capire che il tabernacolo non è una sola superficie dipinta: la cornice, gli sportelli, la tavola centrale e la predella formano un insieme progettato per essere osservato in modi diversi."
       ],
       "sources": [
-        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit"
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit",
+        "https://docs.google.com/document/d/142anmH7OApcByKWkyXGSSVulmRKppCD1R-TGTI2ugeE/edit"
       ],
       "tile": 1,
       "imageCredit": {
@@ -255,9 +275,9 @@
     {
       "id": "incoronazione",
       "object": "Opera_03_SEGNAPOSTO",
-      "title": "Incoronazione della Vergine",
-      "subtitle": "1431-1435 - Tempera su tavola e fondo oro - Uffizi, Firenze",
-      "image": "incoronazione",
+      "title": "Incoronazione della Vergine - Louvre",
+      "subtitle": "1434-1435 circa - Tempera su tavola - Musée du Louvre, Parigi",
+      "image": "incoronazione_louvre",
       "ring": {
         "x": -2.95,
         "y": 14.4,
@@ -265,20 +285,22 @@
         "seconds": 3
       },
       "paragraphs": [
-        "La tavola raffigura la Vergine accanto a Cristo in Paradiso, circondata da santi e angeli che danzano e suonano. Il soggetto celebra Maria come regina del cielo ed è conosciuto anche con il titolo di Glorificazione di Maria.",
-        "Angelico introduce una variante particolare: Cristo non sta posando la corona sul capo della Vergine, ma la arricchisce con una pietra preziosa. Secondo la lettura proposta dagli Uffizi, questo gesto potrebbe richiamare una visione di santa Brigida di Svezia.",
-        "Il fondo oro conserva il valore simbolico della luce divina. La raggiera incisa ne anima la superficie, mentre le figure, disposte a semicerchio e di dimensioni gradualmente diverse, suggeriscono profondità anche senza un’architettura dipinta.",
-        "La folla dei santi non è indistinta: abiti e attributi permettono di riconoscere diversi personaggi. In primo piano compaiono, fra gli altri, Maria Maddalena, santa Lucia, san Girolamo e san Domenico.",
-        "Il dipinto era destinato alla chiesa fiorentina di Sant’Egidio. Era completato da una predella con lo Sposalizio e i Funerali della Vergine, che nel tempo venne separata dalla tavola principale."
+        "L’Incoronazione della Vergine del Louvre fu realizzata per la chiesa di San Domenico a Fiesole, dove Beato Angelico era frate. La grande pala comprende la tavola principale e una predella con la Resurrezione di Cristo e sei episodi della vita di san Domenico. Portata in Francia durante le requisizioni napoleoniche, rimase nel museo parigino.",
+        "Rispetto alla precedente versione degli Uffizi, il fondo oro lascia spazio a un cielo azzurro e a una costruzione prospettica più ardita. L’orizzonte è fissato al quinto gradino del trono: la scena è vista dal basso, come se anche lo spettatore fosse inginocchiato fra i santi che assistono all’evento.",
+        "Cristo incorona Maria sotto un ricco ciborio di gusto gotico, impostato su gradini di marmo policromo. Colonne, trifore, stoffe preziose e oro conservano lo sfarzo della tradizione tardogotica, mentre pavimento, gradinata e rapporti fra le figure mostrano una rigorosa organizzazione dello spazio.",
+        "Angeli musicanti, santi, beati e martiri formano una folla variopinta. Alcuni personaggi sono rappresentati di spalle: questa scelta rafforza il senso di uno spazio nel quale l’osservatore può immaginare di entrare. Le figure hanno una presenza concreta e seguono, nelle dimensioni, la distanza prospettica.",
+        "La luce proviene da sinistra e definisce in modo coerente volumi e colori. La luminosità delle stoffe e dei marmi non è soltanto decorativa: contribuisce alla solennità della visione. Il testo segnala anche l’intervento di collaboratori, soprattutto sul lato destro, mentre Cristo e la Vergine appartengono alle parti di qualità più alta.",
+        "La predella sviluppa una narrazione vivace e sperimentale. Le scene dei miracoli di san Domenico alternano interni ed esterni, pieni e vuoti, architetture e figure. L’intera opera esprime l’equilibrio maturo dell’Angelico fra ricchezza gotica, spiritualità e concretezza rinascimentale."
       ],
       "sources": [
-        "https://www.uffizi.it/opere/angelico-glorificazione"
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit",
+        "https://docs.google.com/document/d/142anmH7OApcByKWkyXGSSVulmRKppCD1R-TGTI2ugeE/edit"
       ],
       "tile": 3,
       "imageCredit": {
-        "page": "https://commons.wikimedia.org/wiki/File:Angelico_-_Coronation_of_the_Virgin_-_Uffizi_(frame_cropped).jpeg",
-        "title": "File:Angelico - Coronation of the Virgin - Uffizi (frame cropped).jpeg",
-        "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Angelico_-_Coronation_of_the_Virgin_-_Uffizi_%28frame_cropped%29.jpeg/1920px-Angelico_-_Coronation_of_the_Virgin_-_Uffizi_%28frame_cropped%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_-_Coronation_of_the_Virgin_-_WGA0627.jpg",
+        "title": "File:Fra Angelico - Coronation of the Virgin - WGA0627.jpg",
+        "url": "https://www.wga.hu/art/a/angelico/12/20louvre.jpg",
         "author": "Fra Angelico",
         "license": "Public domain",
         "licenseUrl": ""
@@ -286,21 +308,21 @@
       "gallery": [
         {
           "tile": 3,
-          "caption": "Incoronazione della Vergine",
-          "image": "incoronazione",
+          "caption": "Incoronazione della Vergine - Louvre",
+          "image": "incoronazione_louvre",
           "imageCredit": {
-            "page": "https://commons.wikimedia.org/wiki/File:Angelico_-_Coronation_of_the_Virgin_-_Uffizi_(frame_cropped).jpeg",
-            "title": "File:Angelico - Coronation of the Virgin - Uffizi (frame cropped).jpeg",
-            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/67/Angelico_-_Coronation_of_the_Virgin_-_Uffizi_%28frame_cropped%29.jpeg/1920px-Angelico_-_Coronation_of_the_Virgin_-_Uffizi_%28frame_cropped%29.jpeg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "page": "https://commons.wikimedia.org/wiki/File:Fra_Angelico_-_Coronation_of_the_Virgin_-_WGA0627.jpg",
+            "title": "File:Fra Angelico - Coronation of the Virgin - WGA0627.jpg",
+            "url": "https://www.wga.hu/art/a/angelico/12/20louvre.jpg",
             "author": "Fra Angelico",
             "license": "Public domain",
             "licenseUrl": ""
           },
           "crop": {
             "x": 15,
-            "y": 109,
+            "y": 58,
             "width": 770,
-            "height": 781
+            "height": 883
           }
         }
       ]
@@ -308,8 +330,8 @@
     {
       "id": "deposizione",
       "object": "Opera_04_SEGNAPOSTO",
-      "title": "Deposizione Strozzi",
-      "subtitle": "Pala di Santa Trinita - Museo di San Marco, Firenze",
+      "title": "Deposizione di Cristo - Pala Strozzi",
+      "subtitle": "Tempera su tavola - Museo Nazionale di San Marco, Firenze",
       "image": "deposizione",
       "ring": {
         "x": 2.95,
@@ -318,14 +340,14 @@
         "seconds": 3
       },
       "paragraphs": [
-        "La Deposizione fu commissionata da Palla Strozzi in memoria del padre Onofrio per la sagrestia della chiesa di Santa Trinita, trasformata in cappella della famiglia. L’opera venne iniziata da Lorenzo Monaco e completata da Beato Angelico.",
-        "La scena centrale mostra il corpo di Cristo mentre viene calato dalla croce. I gesti di chi lo sorregge e le reazioni dei presenti guidano l’attenzione verso il momento del distacco. Il dolore è espresso attraverso pose, sguardi e relazioni fra le figure.",
-        "La cornice conserva l’aspetto di una pala gotica, con cuspidi e scomparti. All’interno, però, Angelico costruisce uno spazio continuo: la narrazione non è suddivisa in episodi isolati, ma si svolge in un ambiente unitario, organizzato secondo una visione prospettica.",
-        "Le figure acquistano presenza e monumentalità. Il rapporto tra la struttura ancora medievale e la nuova unità della scena rende la pala importante per comprendere il passaggio al Rinascimento.",
-        "Rispetto agli affreschi più essenziali delle celle di San Marco, questa opera destinata a una cappella di famiglia conserva una narrazione più ampia e una composizione ricca di personaggi."
+        "La Deposizione di Cristo fu commissionata dagli Strozzi per la sagrestia della chiesa di Santa Trinita. La pala rappresenta il momento in cui il corpo di Gesù viene calato dalla croce da personaggi disposti sulle scale.",
+        "L’attenzione si concentra sui gesti di chi sorregge il corpo e sulle reazioni dei presenti. La Vergine, la Maddalena e le pie donne esprimono un dolore composto: la sofferenza non si traduce in un’agitazione disordinata, ma in pose e sguardi misurati.",
+        "Sullo sfondo si apre il paesaggio con Gerusalemme. La prospettiva coerente dà unità alla scena e permette alle figure di occupare uno spazio credibile. Le pose e i rapporti fra i personaggi guidano lo sguardo verso il corpo di Cristo.",
+        "Oro, blu e rossi luminosi mantengono la preziosità della pittura tardogotica. La solidità dei corpi, la cura dei gesti e l’organizzazione dello spazio appartengono invece alla nuova cultura rinascimentale. L’equilibrio fra questi due linguaggi è uno dei caratteri centrali dell’opera."
       ],
       "sources": [
-        "https://cultura.gov.it/evento/torna-al-museo-di-san-marco-la-deposizione-di-santa-trinita-del-beato-angelico-restaurata-grazie-al-sostegno-de-friends-of-florence"
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit",
+        "https://docs.google.com/document/d/142anmH7OApcByKWkyXGSSVulmRKppCD1R-TGTI2ugeE/edit"
       ],
       "tile": 4,
       "imageCredit": {
@@ -339,7 +361,7 @@
       "gallery": [
         {
           "tile": 4,
-          "caption": "Deposizione Strozzi",
+          "caption": "Deposizione di Cristo - Pala Strozzi",
           "image": "deposizione",
           "imageCredit": {
             "page": "https://commons.wikimedia.org/wiki/File:Beato_angelico,_pala_strozzi_della_deposizione,_con_cuspidi_e_predella_di_lorenzo_monaco,_01.JPG",
@@ -371,14 +393,15 @@
         "seconds": 3
       },
       "paragraphs": [
-        "Cristo deriso appartiene al ciclo di affreschi delle celle del convento di San Marco. Queste immagini accompagnavano la preghiera personale dei frati: non dovevano raccontare ogni dettaglio dell’episodio, ma favorire una meditazione raccolta sulla Passione.",
-        "Gesù è seduto frontalmente, avvolto in una veste bianca e con gli occhi bendati. Il globo e il fascio di verghe richiamano una regalità derisa, ma la sua posizione solenne continua a suggerire dignità e maestà.",
-        "I persecutori non sono rappresentati come figure intere. Mani e volto isolati riassumono gli insulti e le violenze, rendendo l’episodio simile a una visione simbolica. L’attenzione resta concentrata su Cristo, anziché sull’azione dei carnefici.",
-        "Ai piedi del trono siedono la Vergine e san Domenico, raccolti nella contemplazione. Il libro del santo rimanda alla riflessione sul significato del sacrificio.",
-        "La composizione mostra il linguaggio essenziale di San Marco: pochi elementi, figure distanziate e un’immagine che invita chi guarda a partecipare interiormente alla scena."
+        "Cristo deriso è un affresco della cella 7 del dormitorio del convento di San Marco a Firenze. Fa parte del ciclo destinato ai frati domenicani, pensato per accompagnare la meditazione personale e la preghiera quotidiana.",
+        "Cristo occupa il centro della scena: è bendato, porta la corona di spine e regge uno scettro di canna. La posizione frontale e il raccoglimento della figura contrappongono la sua dignità alla derisione subita.",
+        "I persecutori non sono descritti con corpi interi, ma attraverso frammenti: mani e volto riassumono gli insulti e le violenze. Questa scelta allontana la scena da una narrazione affollata e la trasforma in un’immagine essenziale, quasi astratta.",
+        "In primo piano si trovano la Vergine e san Domenico. Il santo costituisce un modello per il frate che prega davanti all’affresco: invita a fermarsi, osservare e meditare sul significato della Passione.",
+        "La riduzione dei particolari risponde alla funzione dell’opera. L’immagine non cerca lo splendore delle grandi pale d’altare, ma concentra l’attenzione sull’esperienza interiore di chi guarda."
       ],
       "sources": [
-        "https://museodisanmarco.blog/2021/08/28/langelico-a-san-marco-raccontato-da-padre-marchese-sesta-puntata-gli-affreschi-del-dormitorio-seconda-parte/"
+        "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit",
+        "https://docs.google.com/document/d/142anmH7OApcByKWkyXGSSVulmRKppCD1R-TGTI2ugeE/edit"
       ],
       "tile": 5,
       "imageCredit": {
@@ -416,7 +439,7 @@
       "object": "SalaConfronto",
       "kind": "comparison",
       "title": "Tre Annunciazioni a confronto",
-      "subtitle": "San Marco - Prado - San Giovanni Valdarno",
+      "subtitle": "San Marco - Prado - Cortona",
       "image": "ann_sanmarco",
       "ring": {
         "x": 0,
@@ -426,37 +449,38 @@
       },
       "sources": [
         "https://www.canva.com/design/DAHaIe3yFTg/s6nRzUMttDf9u-ugI2xQvw/edit",
-        "https://docs.google.com/document/d/142anmH7OApcByKWkyXGSSVulmRKppCD1R-TGTI2ugeE/edit",
-        "https://www.museobasilica.it/project/annunciazione-beato-angelico-approfondimento/"
+        "https://docs.google.com/document/d/142anmH7OApcByKWkyXGSSVulmRKppCD1R-TGTI2ugeE/edit"
       ],
       "paragraphs": [
-        "Lo stesso episodio assume forme diverse a seconda della destinazione dell’opera. Le due tavole del Prado e di San Giovanni Valdarno accostano all’annuncio a Maria la Cacciata di Adamo ed Eva, mettendo in rapporto il peccato originale e l’inizio della Redenzione. Nell’affresco di San Marco la narrazione si concentra invece sull’incontro fra l’angelo e la Vergine.",
-        "In tutte e tre le opere, il loggiato costruito in prospettiva ordina lo spazio e il giardino recintato richiama la purezza di Maria. Cambia però il peso dei particolari: oro, tessuti e vegetazione arricchiscono le tavole, mentre nell’affresco prevalgono superfici spoglie e gesti raccolti.",
-        "La luce unisce la ricerca dello spazio a un significato spirituale. Nelle tavole anima colori, ornamenti e simboli; a San Marco una luminosità diffusa accompagna il silenzio della composizione. Il passaggio non è soltanto cronologico: Angelico adatta il proprio linguaggio al pubblico e alla funzione dell’immagine."
+        "Le Annunciazioni del Prado e di Cortona sono pale d’altare a tempera su tavola; quella di San Marco è invece un affresco destinato all’ambiente del convento. Il medesimo episodio assume così forme diverse secondo il luogo e il pubblico a cui si rivolge.",
+        "Le due tavole affiancano alla scena principale la Cacciata di Adamo ed Eva. Si crea un legame fra il peccato originale e la Redenzione, che comincia con l’accettazione di Maria. Il giardino, descritto con precisione botanica, contiene piante simboliche come rose e palme; le stoffe e gli inserti dorati conservano il gusto prezioso del Gotico internazionale.",
+        "Anche la prospettiva distingue le due pale. Nel Prado il punto di fuga è centrale; a Cortona si sposta all’esterno del loggiato, verso il giardino. A Cortona compaiono inoltre le parole del dialogo fra l’angelo e Maria, dipinte come una sequenza di risposte, e un raffinato studio della luce come riflesso della presenza divina.",
+        "San Marco segna una svolta verso la sobrietà. Restano il loggiato prospettico e il giardino recintato, ma scompaiono i progenitori e molti ornamenti. La scena è decentrata, i protagonisti incrociano le braccia sul petto e la luce diffusa avvolge un’architettura austera. La ricchezza narrativa delle tavole si trasforma in essenzialità spirituale."
       ],
       "sections": [
         {
-          "heading": "San Marco - un’immagine per la meditazione",
+          "heading": "San Marco - silenzio e meditazione",
           "paragraphs": [
-            "L’affresco accoglie chi sale al primo piano del convento di San Marco. Gabriele e Maria, sotto un loggiato austero, incrociano le braccia sul petto in segno di umiltà e accettazione della volontà divina.",
-            "La scena è spostata verso destra per lasciare spazio al giardino recintato, simbolo della purezza della Vergine. La prospettiva ordinata e i corpi solidi mostrano l’incontro con la nuova pittura rinascimentale.",
-            "L’affresco si trova nel convento, lungo il percorso verso il dormitorio. L’assenza della Cacciata e la riduzione degli ornamenti concentrano la lettura sul consenso di Maria. La semplicità dell’architettura e le braccia incrociate dei protagonisti rendono l’incontro misurato e silenzioso."
+            "Realizzato intorno al 1440, il grande affresco accoglie i visitatori in cima alla scala del convento. Gabriele è inginocchiato davanti a Maria, seduta su un semplice sgabello. Entrambi incrociano le braccia in segno di sottomissione alla volontà divina.",
+            "Il decentramento verso destra lascia spazio al giardino recintato e ai cipressi, simboli della purezza della Vergine. I capitelli corinzi e ionici alludono rispettivamente alla gloria e all’umiltà. Le due iscrizioni lungo la base contengono il saluto angelico e l’invito a recitare l’Ave Maria.",
+            "Ali variopinte, oro e azzurrite conservano tracce di preziosità, ma l’effetto complessivo è spoglio e raccolto. La prospettiva regolare, la plasticità dei corpi e la luce diffusa uniscono lo spazio rinascimentale a un’atmosfera di quiete spirituale."
           ]
         },
         {
-          "heading": "Prado - dalla caduta alla Redenzione",
+          "heading": "Prado - peccato originale e Redenzione",
           "paragraphs": [
-            "La pala a tempera su tavola fu realizzata per il convento di San Domenico a Fiesole. A sinistra, Adamo ed Eva vengono cacciati dal Paradiso; a destra, l’annuncio dell’angelo a Maria apre il cammino della Redenzione.",
-            "Il loggiato è costruito secondo le regole della prospettiva. Il giardino, le stoffe dorate e le ali variopinte conservano invece la preziosità e l’attenzione al dettaglio della tradizione tardogotica.",
-            "Il raggio dorato e la colomba dello Spirito Santo collegano la dimensione divina alla Vergine. Le figure si inseriscono in un ambiente prospettico preciso, ma il giardino minuzioso, i tessuti e l’oro conservano il gusto prezioso della tradizione tardogotica."
+            "La pala, realizzata per San Domenico a Fiesole e datata nei materiali intorno al 1425-1426, presenta due momenti lontani nel tempo ma collegati: la Cacciata dei progenitori a sinistra e l’Annunciazione a destra. Nella predella si sviluppano le storie della vita di Maria.",
+            "Il loggiato segue le regole della prospettiva brunelleschiana. Volte stellate, marmi e stoffe preziose convivono con particolari realistici, fra cui la rondine appoggiata al tirante. Nel giardino le piante e i fiori sono studiati con precisione miniaturistica.",
+            "Un raggio dorato accompagna la colomba dello Spirito Santo verso Maria. Le braccia incrociate dei protagonisti esprimono umiltà; i corpi solidi e la luce mattutina uniforme fanno convivere nuovo realismo e visione spirituale."
           ]
         },
         {
-          "heading": "San Giovanni Valdarno - prospettiva e simboli",
+          "heading": "Cortona - il dialogo e la luce",
           "paragraphs": [
-            "La tavola, proveniente dal convento di Montecarlo, è conservata nel Museo della Basilica di Santa Maria delle Grazie. È distinta dall’Annunciazione di Cortona: qui il confronto riguarda l’opera effettivamente esposta nella galleria.",
-            "La loggia si apre verso il giardino e lascia intravedere sul fondo l’ambiente di Maria. La Cacciata di Adamo ed Eva e il profeta Isaia nel tondo collegano l’annuncio alla storia della salvezza.",
-            "L’oro e il ricco repertorio di piante hanno valore simbolico. La colonna, la palma e il giardino recintato rinviano alla vicenda di Cristo e alle virtù della Vergine. La costruzione prospettica e il senso della profondità mostrano l’incontro con le novità rinascimentali."
+            "Datata nei testi intorno al 1430, l’Annunciazione di Cortona è una tempera su tavola conservata nel Museo diocesano. La scena si svolge sotto un loggiato rinascimentale con colonne corinzie e soffitto stellato, affacciato sul giardino recintato.",
+            "L’angelo comunica attraverso gesti e parole dipinte. Il dialogo procede come una botta e risposta, mentre Maria accetta il proprio compito con un inchino e con le braccia incrociate. Il libro sulle ginocchia e il profeta nel medaglione richiamano le Scritture che si avverano.",
+            "Il punto di fuga cade verso il giardino e conduce alla Cacciata di Adamo ed Eva. Rose, palma e altre piante hanno significati simbolici. Tessuti ricamati e dettagli botanici conservano il gusto tardogotico, mentre corpi plastici e spazio coerente sono rinascimentali.",
+            "Lo studio della luce ha anche un valore teologico: la luce terrena riflette il lumen divino. La predella conserva scene della vita della Vergine e della leggenda di san Domenico, in una narrazione che tende alla continuità del paesaggio."
           ]
         }
       ],
@@ -510,21 +534,21 @@
         },
         {
           "tile": 8,
-          "caption": "San Giovanni Valdarno - tavola",
-          "image": "ann_valdarno",
+          "caption": "Cortona - tavola",
+          "image": "ann_cortona",
           "imageCredit": {
-            "page": "https://commons.wikimedia.org/wiki/File:Annunciation_angelico_valdarno.jpg",
-            "title": "File:Annunciation angelico valdarno.jpg",
-            "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/Annunciation_angelico_valdarno.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-            "author": "Wikimedia Commons",
+            "page": "https://commons.wikimedia.org/wiki/File:Angelico_Annunciation_(Cortona).jpg",
+            "title": "File:Angelico Annunciation (Cortona).jpg",
+            "url": "https://www.wga.hu/art/a/angelico/04/1annunc.jpg",
+            "author": "Fra Angelico",
             "license": "Public domain",
             "licenseUrl": ""
           },
           "crop": {
             "x": 15,
-            "y": 57,
+            "y": 102,
             "width": 770,
-            "height": 886
+            "height": 796
           }
         }
       ]
@@ -1525,5 +1549,6 @@
         -13.869999885559082
       ]
     ]
-  }
+  },
+  "textRevision": "Canva e Google Docs - 17 novembre 2026"
 }
