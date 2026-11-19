@@ -131,10 +131,11 @@ class VIEW3D_OT_visita_galleria(bpy.types.Operator):
                 batch_for_shader(shader,'TRI_FAN',{'pos':[(x,y),(x+iw,y),(x+iw,y+ih),(x,y+ih)],'texCoord':[(u0,v0),(u0+1/3,v0),(u0+1/3,v0+1/3),(u0,v0+1/3)]}).draw(shader)
             draw_words(item['caption'],x,y-22,12)
         tx=24 if comparison else total+48;top=h-160-ih if comparison else h-120;line_width=max(15,int((w-tx-30)/8));lines=[]
-        for paragraph in card['paragraphs']:lines.extend(textwrap.wrap(paragraph,line_width)+[''])
         for section in card.get('sections',[]):
             lines.extend(textwrap.wrap(section['heading'],line_width)+[''])
             for paragraph in section['paragraphs']:lines.extend(textwrap.wrap(paragraph,line_width)+[''])
+        if comparison:lines.extend(['Confronto',''])
+        for paragraph in card['paragraphs']:lines.extend(textwrap.wrap(paragraph,line_width)+[''])
         self.art_scroll=max(0,min(self.art_scroll,max(0,len(lines)*22-(top-65))))
         for i,line in enumerate(lines):
             ly=top-i*22+self.art_scroll

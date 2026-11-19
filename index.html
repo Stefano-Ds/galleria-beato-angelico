@@ -247,7 +247,7 @@ addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updat
 let chronology=null,ringStarted=null,ringArmed=true;const timelineMeshes=[],raycaster=new THREE.Raycaster();
 const timelineDialog=$('timelineDialog'),timelineViewport=$('timelineViewport');
 function element(tag,cls,text){const el=document.createElement(tag);if(cls)el.className=cls;if(text)el.textContent=text;return el}
-function timelineCard(event,band){const info=event[band];if(!info)return element('div','tl-empty');const card=element('article','tl-card '+band),photo=element('a','tl-photo');photo.href=event.photo.page;photo.target='_blank';photo.rel='noopener';photo.setAttribute('role','img');photo.setAttribute('aria-label',event.caption);photo.title=event.caption+' - '+event.photo.author+' - '+event.photo.license+' - '+event.photo.page;photo.style.backgroundPosition=`${event.atlas.column*100/3}% ${event.atlas.row*100/3}%`;card.append(photo,element('h3','',info.title),element('p','',info.text));return card}
+function timelineCard(event,band){const info=event[band];if(!info)return element('div','tl-empty');const card=element('article','tl-card '+band),photo=element('div','tl-photo');photo.setAttribute('role','img');photo.setAttribute('aria-label',info.title);photo.style.backgroundPosition=`${event.atlas.column*100/3}% ${event.atlas.row*100/3}%`;card.append(photo,element('h3','',info.title),element('p','',info.text));return card}
 function buildTimeline(data){chronology=data;$('timelineTrack').replaceChildren();for(const event of data.events){const column=element('section','tl-column');column.setAttribute('aria-label',event.date);column.dataset.eventId=event.id;const date=element('div','tl-date');date.append(element('span','',event.date));column.append(timelineCard(event,'life'),date,timelineCard(event,'style'));$('timelineTrack').append(column);}}
 function openTimeline(index=0){if(!chronology||timelineDialog.open)return;ringArmed=false;ringStarted=null;$('ringPrompt').hidden=true;stop();document.body.classList.add('timeline-open');timelineDialog.showModal();timelineViewport.scrollLeft=Math.max(0,index*300);$('timelineClose').focus()}
 function closeTimeline(){timelineDialog.close();document.body.classList.remove('timeline-open');ringStarted=null;enter.textContent='Riprendi';enter.focus()}
@@ -273,9 +273,11 @@ function openArtCard(card){
  if(artDialog.open||timelineDialog.open)return;
  artBlocked=card.id;stop();$('artTitle').textContent=card.title;$('artSubtitle').textContent=card.subtitle;$('artSubtitle').hidden=!card.subtitle;
  artDialog.classList.toggle('comparison',card.kind==='comparison');
- $('artGallery').replaceChildren(...card.gallery.map(item=>{const figure=element('figure',''),img=element('img','');img.src=item.photo;img.alt=item.caption;img.title=[item.imageCredit.author,item.imageCredit.license,item.imageCredit.page].filter(Boolean).join(' - ');figure.append(img,element('figcaption','',item.caption));return figure}));
- const content=card.paragraphs.map(text=>element('p','',text));
+ $('artGallery').replaceChildren(...card.gallery.map(item=>{const figure=element('figure',''),img=element('img','');img.src=item.photo;img.alt=item.caption;figure.append(img,element('figcaption','',item.caption));return figure}));
+ const content=[];
  if(card.sections){const sections=element('div','comparison-sections');for(const section of card.sections){const article=element('section','');article.append(element('h3','',section.heading),...section.paragraphs.map(text=>element('p','',text)));sections.append(article)}content.push(sections)}
+ if(card.kind==='comparison')content.push(element('h3','','Confronto'));
+ content.push(...card.paragraphs.map(text=>element('p','',text)));
  $('artCopy').replaceChildren(...content);document.body.classList.add('art-open');artDialog.showModal();$('artClose').focus();$('artCopy').scrollTop=0;artDialog.querySelector('.art-layout').scrollTop=0;
 }
 function closeArtCard(){artDialog.close();document.body.classList.remove('art-open');clearArtDwell();enter.textContent='Riprendi';enter.focus()}
